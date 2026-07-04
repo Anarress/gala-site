@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GALA | Yapay Zekaya Açılan Kapınız</title>
-<meta name="description" content="Şirket içi yapay zekâ altyapısı: kod ve verileriniz dışarı çıkmadan, kullanıcı başına lisans ücreti olmadan. Gala · GalaChat · GalaFlow.">
+<meta name="description" id="metadesc" content="Şirket içi yapay zekâ altyapısı: kod ve verileriniz dışarı çıkmadan, kullanıcı başına lisans ücreti olmadan. Gala · GalaChat · GalaFlow.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
@@ -36,7 +36,6 @@
         line-height: 1.6;
     }
 
-    /* Grid Background */
     .grid-bg {
         position: fixed; inset: 0;
         background:
@@ -57,11 +56,10 @@
     @keyframes gridMove { 0% { background-position: 0 0, 0 0; } 100% { background-position: 0 300px, 0 300px; } }
     @media (prefers-reduced-motion: reduce) { .grid-floor { animation: none; } }
 
-    /* Navigation */
     nav {
         position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
         padding: 1rem 5%;
-        display: flex; justify-content: space-between; align-items: center;
+        display: flex; justify-content: space-between; align-items: center; gap: 1rem;
         background: linear-gradient(180deg, var(--dark-void) 0%, transparent 100%);
         transition: all 0.3s ease;
     }
@@ -98,13 +96,22 @@
     }
     .nav-links a:hover { color: var(--neon-pink); text-shadow: 0 0 10px var(--neon-pink); }
     .nav-links a:hover::after { width: 100%; }
+    .nav-right { display: flex; align-items: center; gap: 1rem; }
+    .lang-select {
+        background: rgba(13, 2, 33, 0.9); color: var(--neon-cyan);
+        border: 1px solid rgba(5, 217, 232, 0.5);
+        font-family: 'Share Tech Mono', monospace; font-size: 0.85rem;
+        padding: 0.5rem 0.7rem; cursor: pointer; letter-spacing: 1px;
+    }
+    .lang-select:focus-visible { outline: 2px solid var(--neon-yellow); }
+    .lang-select option { background: var(--dark-void); color: white; }
     .nav-cta {
         padding: 0.75rem 1.5rem; background: transparent;
         border: 2px solid var(--neon-pink); color: var(--neon-pink);
         font-family: 'Orbitron', sans-serif; font-size: 0.8rem; font-weight: 600;
         letter-spacing: 2px; text-transform: uppercase; cursor: pointer;
         transition: all 0.3s ease; position: relative; overflow: hidden;
-        text-decoration: none; display: inline-block;
+        text-decoration: none; display: inline-block; white-space: nowrap;
     }
     .nav-cta::before {
         content: ''; position: absolute; inset: 0; background: var(--neon-pink);
@@ -113,7 +120,6 @@
     .nav-cta:hover { color: white; box-shadow: 0 0 20px var(--neon-pink); }
     .nav-cta:hover::before { transform: translateX(0); }
 
-    /* Hero */
     .hero {
         min-height: 100vh;
         display: grid; grid-template-columns: 1.05fr 1fr; gap: 3rem; align-items: center;
@@ -175,7 +181,6 @@
     }
     .btn-secondary:hover { background: var(--neon-cyan); color: var(--dark-void); box-shadow: 0 0 30px var(--neon-cyan); }
 
-    /* Terminal (hero demo) */
     .term {
         background: rgba(13, 2, 33, 0.9);
         border: 1px solid var(--neon-cyan);
@@ -189,12 +194,14 @@
     }
     .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(5, 217, 232, 0.35); }
     .term-title { margin-left: 8px; font-size: 0.75rem; color: rgba(5, 217, 232, 0.7); font-family: 'Share Tech Mono', monospace; letter-spacing: 1px; }
+    [dir="rtl"] .term-title { margin-left: 0; margin-right: 8px; }
     .badge-off {
         margin-left: auto; font-size: 0.7rem; color: var(--neon-pink);
         border: 1px solid var(--neon-pink); padding: 2px 10px;
         font-family: 'Share Tech Mono', monospace; letter-spacing: 1px;
         text-shadow: 0 0 8px var(--neon-pink);
     }
+    [dir="rtl"] .badge-off { margin-left: 0; margin-right: auto; }
     .term-body {
         padding: 18px 18px 22px;
         font-family: 'Share Tech Mono', monospace; font-size: 0.82rem; line-height: 1.8;
@@ -213,7 +220,6 @@
     @keyframes blink { 50% { opacity: 0; } }
     @media (prefers-reduced-motion: reduce) { .cursor { animation: none; } }
 
-    /* Sections */
     section { padding: 6rem 5%; position: relative; z-index: 1; }
     .section-header { text-align: center; margin-bottom: 3.5rem; }
     .section-tag {
@@ -235,7 +241,6 @@
         max-width: 620px; margin: 1rem auto 0;
     }
 
-    /* Product cards */
     .products-grid {
         display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
         max-width: 1200px; margin: 0 auto;
@@ -278,9 +283,7 @@
         font-family: 'Share Tech Mono', monospace; font-size: 0.75rem;
         letter-spacing: 2px; text-transform: uppercase; color: var(--term-green);
     }
-    .product-status.soon { color: var(--neon-yellow); }
 
-    /* Feature cards */
     .features { background: linear-gradient(180deg, transparent 0%, rgba(26, 5, 51, 0.5) 100%); }
     .features-grid {
         display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;
@@ -313,7 +316,6 @@
     }
     .feature-description { color: rgba(255, 255, 255, 0.7); font-size: 0.93rem; line-height: 1.7; }
 
-    /* Process timeline */
     .process { background: linear-gradient(180deg, rgba(26, 5, 51, 0.5) 0%, transparent 100%); }
     .process-timeline { max-width: 900px; margin: 0 auto; position: relative; }
     .process-timeline::before {
@@ -324,7 +326,9 @@
     .process-step { display: flex; align-items: center; margin-bottom: 3rem; position: relative; }
     .process-step:nth-child(even) { flex-direction: row-reverse; }
     .process-step:nth-child(even) .process-content { text-align: right; padding-right: 4rem; padding-left: 0; }
+    [dir="rtl"] .process-step:nth-child(even) .process-content { text-align: left; padding-left: 4rem; padding-right: 0; }
     .process-content { flex: 1; padding-left: 4rem; }
+    [dir="rtl"] .process-content { padding-left: 0; padding-right: 4rem; }
     .process-number {
         position: absolute; left: 50%; transform: translateX(-50%);
         width: 60px; height: 60px; background: var(--dark-void);
@@ -346,7 +350,6 @@
         color: var(--neon-cyan); letter-spacing: 2px;
     }
 
-    /* Honesty (corner-bracket card) */
     .honest-container { max-width: 820px; margin: 0 auto; }
     .honest-card {
         background: rgba(13, 2, 33, 0.8);
@@ -361,14 +364,15 @@
     .honest-card::after { bottom: -1px; right: -1px; border-left: none; border-top: none; }
     .honest-card ul { list-style: none; }
     .honest-card li { margin-bottom: 1.2rem; color: rgba(255, 255, 255, 0.75); font-size: 1.05rem; padding-left: 1.6rem; position: relative; }
+    [dir="rtl"] .honest-card li { padding-left: 0; padding-right: 1.6rem; }
     .honest-card li:last-child { margin-bottom: 0; }
     .honest-card li::before {
         content: '»'; position: absolute; left: 0; color: var(--neon-cyan);
         font-family: 'Share Tech Mono', monospace; text-shadow: 0 0 8px var(--neon-cyan);
     }
+    [dir="rtl"] .honest-card li::before { left: auto; right: 0; content: '«'; }
     .honest-card li strong { color: white; }
 
-    /* Stats (tech facts) */
     .stats-container {
         max-width: 1100px; margin: 0 auto;
         display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6rem;
@@ -394,7 +398,6 @@
     }
     .stat-note { font-size: 0.85rem; color: rgba(255, 255, 255, 0.5); margin-top: 0.4rem; }
 
-    /* CTA */
     .cta-section { text-align: center; position: relative; overflow: hidden; }
     .cta-section::before {
         content: ''; position: absolute; top: 50%; left: 50%;
@@ -414,7 +417,6 @@
     .cta-subtitle { color: rgba(255, 255, 255, 0.7); font-size: 1.2rem; margin-bottom: 2.5rem; }
     .cta-buttons { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
 
-    /* Footer */
     footer {
         background: var(--dark-void); padding: 3rem 5% 2rem;
         border-top: 1px solid rgba(5, 217, 232, 0.2);
@@ -433,7 +435,6 @@
 
     a:focus-visible, button:focus-visible { outline: 2px solid var(--neon-yellow); outline-offset: 3px; }
 
-    /* Responsive */
     @media (max-width: 1024px) {
         .features-grid { grid-template-columns: 1fr 1fr; }
         .products-grid { grid-template-columns: 1fr; max-width: 560px; }
@@ -449,6 +450,7 @@
         .process-timeline::before { left: 30px; }
         .process-step, .process-step:nth-child(even) { flex-direction: column; align-items: flex-start; padding-left: 80px; }
         .process-content, .process-step:nth-child(even) .process-content { padding: 0; text-align: left; }
+        [dir="rtl"] .process-content, [dir="rtl"] .process-step:nth-child(even) .process-content { text-align: right; }
         .process-number { left: 30px; transform: translateX(-50%); }
     }
 </style>
@@ -463,39 +465,38 @@
             GALA
         </a>
         <ul class="nav-links">
-            <li><a href="#urunler">Ürünler</a></li>
-            <li><a href="#neden">Neden</a></li>
-            <li><a href="#surec">Süreç</a></li>
-            <li><a href="#acik">Açık Konuşalım</a></li>
+            <li><a href="#urunler" data-i18n="nav.products"></a></li>
+            <li><a href="#neden" data-i18n="nav.why"></a></li>
+            <li><a href="#surec" data-i18n="nav.process"></a></li>
+            <li><a href="#acik" data-i18n="nav.honest"></a></li>
         </ul>
-        <a class="nav-cta" href="mailto:esatelmas@gmail.com?subject=Gala%20demo%20talebi">Demo İste</a>
+        <div class="nav-right">
+            <select class="lang-select" id="langsel" aria-label="Language"></select>
+            <a class="nav-cta" id="navcta" href="mailto:esatelmas@gmail.com?subject=Gala%20demo" data-i18n="nav.cta"></a>
+        </div>
     </nav>
 
     <section class="hero">
         <div class="hero-content">
             <div class="hero-tag">
                 <div class="hero-tag-pulse"></div>
-                Şirket İçi Yapay Zekâ // KVKK Uyumlu
+                <span data-i18n="hero.tag"></span>
             </div>
             <h1 class="hero-title">
-                <span class="line-1">Yapay Zekâ</span>
-                <span class="line-2">Veriniz İçeride</span>
+                <span class="line-1" data-i18n="hero.t1"></span>
+                <span class="line-2" data-i18n="hero.t2"></span>
             </h1>
-            <p class="hero-description">
-                Kod yazan ajan asistan, belgelerinizle konuşan iç sohbet, ekip bazlı bütçe ve
-                kullanım kontrolü — hepsi kendi sunucunuzda. Kullanıcı başına lisans ücreti yok.
-                İnternet bile şart değil: yandaki kayıt uçak modunda alındı.
-            </p>
+            <p class="hero-description" data-i18n="hero.desc"></p>
             <div class="hero-cta-group">
-                <a class="btn-primary" href="mailto:esatelmas@gmail.com?subject=Gala%20demo%20talebi">Demo İsteyin</a>
-                <a class="btn-secondary" href="#urunler">Ürünleri Gör</a>
+                <a class="btn-primary" href="mailto:esatelmas@gmail.com?subject=Gala%20demo" data-i18n="hero.cta1"></a>
+                <a class="btn-secondary" href="#urunler" data-i18n="hero.cta2"></a>
             </div>
         </div>
-        <div class="term" aria-label="Uçak modunda çalışan yapay zekâ asistanı terminal kaydı">
+        <div class="term" dir="ltr" aria-label="Offline AI assistant terminal recording">
             <div class="term-bar">
                 <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-                <span class="term-title">DEMO // UÇAK MODU</span>
-                <span class="badge-off">✈ ÇEVRİMDIŞI</span>
+                <span class="term-title" data-i18n="term.title"></span>
+                <span class="badge-off" data-i18n="term.badge"></span>
             </div>
             <div class="term-body" id="termbody"></div>
         </div>
@@ -503,126 +504,97 @@
 
     <section id="urunler">
         <div class="section-header">
-            <span class="section-tag">Ürün Ailesi</span>
-            <h2 class="section-title">Kapıdan İçeri Üç Yol</h2>
-            <p class="section-subtitle">
-                Aynı çekirdek altyapı — ağ geçidi, yerel modeller, bütçe kontrolü — üç farklı pakette.
-            </p>
+            <span class="section-tag" data-i18n="prod.tag"></span>
+            <h2 class="section-title" data-i18n="prod.title"></h2>
+            <p class="section-subtitle" data-i18n="prod.sub"></p>
         </div>
         <div class="products-grid">
             <div class="product-card">
                 <h3 class="product-name">Gala</h3>
-                <div class="product-for">// Yazılım şirketleri</div>
-                <p class="product-desc">
-                    <strong>Kod yazan ajan asistan.</strong> Geliştiriciler terminalden dosya okuyup
-                    düzelten asistanla çalışır; analist, tester ve PO tarayıcıdan aynı altyapıyı kullanır.
-                    Ekip başına anahtar, aylık bütçe, kullanım panosu.
-                </p>
-                <div class="product-status">● SATIŞTA</div>
+                <div class="product-for" data-i18n="p1.for"></div>
+                <p class="product-desc" data-i18n-html="p1.desc"></p>
+                <div class="product-status" data-i18n="status.avail"></div>
             </div>
             <div class="product-card">
                 <h3 class="product-name">GalaChat</h3>
-                <div class="product-for">// Yazılım geliştirmeyen firmalar</div>
-                <p class="product-desc">
-                    <strong>Belgelerinizle konuşan iç asistan.</strong> Yönetmelik, prosedür ve
-                    sözleşmelerinizi yükleyin; personel sorusuna belgeye dayalı, kaynak gösteren
-                    cevap alsın. Belgede olmayana "belgede yok" der — uydurmaz.
-                </p>
-                <div class="product-status">● SATIŞTA</div>
+                <div class="product-for" data-i18n="p2.for"></div>
+                <p class="product-desc" data-i18n-html="p2.desc"></p>
+                <div class="product-status" data-i18n="status.avail"></div>
             </div>
             <div class="product-card">
                 <h3 class="product-name">GalaFlow</h3>
-                <div class="product-for">// Otomasyon ihtiyacı olanlar</div>
-                <p class="product-desc">
-                    <strong>İş akışlarınızı otomatikleştiren ajanlar.</strong> E-posta özetleme ve taslak
-                    yanıt, belgeden veri çıkarma, periyodik rapor üretimi — hepsi aynı güvenli
-                    altyapı üzerinde, aynı bütçe kontrolüyle.
-                </p>
-                <div class="product-status">● SATIŞTA</div>
+                <div class="product-for" data-i18n="p3.for"></div>
+                <p class="product-desc" data-i18n-html="p3.desc"></p>
+                <div class="product-status" data-i18n="status.avail"></div>
             </div>
         </div>
     </section>
 
     <section class="features" id="neden">
         <div class="section-header">
-            <span class="section-tag">Neden Gala</span>
-            <h2 class="section-title">Sızıntı Yok · Fatura Yok</h2>
-            <p class="section-subtitle">
-                Ekipler bugün ya kodu buluta yapıştırıp gizliliği göze alıyor ya da yapay zekâdan
-                uzak durup geride kalıyor. İkisi de kabul edilebilir değil.
-            </p>
+            <span class="section-tag" data-i18n="feat.tag"></span>
+            <h2 class="section-title" data-i18n="feat.title"></h2>
+            <p class="section-subtitle" data-i18n="feat.sub"></p>
         </div>
         <div class="features-grid">
             <div class="feature-card">
                 <div class="feature-icon">&#128274;</div>
-                <h3 class="feature-title">Veri İçeride</h3>
-                <p class="feature-description">
-                    Modeller kendi sunucunuzda çalışır. İstemler, kod ve belgeler hiçbir dış servise
-                    gitmez; kapalı ağda dahi çalışır.
-                </p>
+                <h3 class="feature-title" data-i18n="f1.t"></h3>
+                <p class="feature-description" data-i18n="f1.d"></p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">&#128184;</div>
-                <h3 class="feature-title">Lisans Ücreti Yok</h3>
-                <p class="feature-description">
-                    Açık kaynak yığın: kullanıcı, ay veya token başına ücret yok. Bir donanım
-                    yatırımı; kullanım arttıkça maliyet artmaz.
-                </p>
+                <h3 class="feature-title" data-i18n="f2.t"></h3>
+                <p class="feature-description" data-i18n="f2.d"></p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">&#129302;</div>
-                <h3 class="feature-title">İş Yapan Ajan</h3>
-                <p class="feature-description">
-                    Sohbet kutusu değil: dosyayı bulan, okuyan, düzelten ve kaynak gösteren
-                    asistanlar. Çıktı her zaman insan onayından geçer.
-                </p>
+                <h3 class="feature-title" data-i18n="f3.t"></h3>
+                <p class="feature-description" data-i18n="f3.d"></p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">&#128200;</div>
-                <h3 class="feature-title">Kontrol Yönetimde</h3>
-                <p class="feature-description">
-                    Ekip başına anahtar ve bütçe; kim, hangi model, ne kadar — panoda. Ayrılan
-                    personelin anahtarı tek komutla iptal.
-                </p>
+                <h3 class="feature-title" data-i18n="f4.t"></h3>
+                <p class="feature-description" data-i18n="f4.d"></p>
             </div>
         </div>
     </section>
 
     <section class="process" id="surec">
         <div class="section-header">
-            <span class="section-tag">Kurulum Protokolü</span>
-            <h2 class="section-title">Anahtar Teslim Süreç</h2>
+            <span class="section-tag" data-i18n="proc.tag"></span>
+            <h2 class="section-title" data-i18n="proc.title"></h2>
         </div>
         <div class="process-timeline">
             <div class="process-step">
                 <div class="process-content">
-                    <h3 class="process-title">Değerlendirme</h3>
-                    <p class="process-text">Ekip, donanım, ağ ve süreç analizi; boyutlandırma önerisi ve teklif.</p>
-                    <span class="process-dur">1 GÜN</span>
+                    <h3 class="process-title" data-i18n="proc1.t"></h3>
+                    <p class="process-text" data-i18n="proc1.d"></p>
+                    <span class="process-dur" data-i18n="proc1.dur"></span>
                 </div>
                 <div class="process-number">01</div>
             </div>
             <div class="process-step">
                 <div class="process-content">
-                    <h3 class="process-title">Kurulum</h3>
-                    <p class="process-text">Sunucu, modeller, anahtar/bütçe yapısı ve uçtan uca doğrulama testleri.</p>
-                    <span class="process-dur">1–2 GÜN</span>
+                    <h3 class="process-title" data-i18n="proc2.t"></h3>
+                    <p class="process-text" data-i18n="proc2.d"></p>
+                    <span class="process-dur" data-i18n="proc2.dur"></span>
                 </div>
                 <div class="process-number">02</div>
             </div>
             <div class="process-step">
                 <div class="process-content">
-                    <h3 class="process-title">Eğitim</h3>
-                    <p class="process-text">Rol bazlı uygulamalı eğitim — gerçek işlerinizle, slaytsız.</p>
-                    <span class="process-dur">YARIM–2 GÜN</span>
+                    <h3 class="process-title" data-i18n="proc3.t"></h3>
+                    <p class="process-text" data-i18n="proc3.d"></p>
+                    <span class="process-dur" data-i18n="proc3.dur"></span>
                 </div>
                 <div class="process-number">03</div>
             </div>
             <div class="process-step">
                 <div class="process-content">
-                    <h3 class="process-title">Destek &amp; Devir</h3>
-                    <p class="process-text">30 gün uzaktan destek, işletim devri ve Türkçe dokümantasyon.</p>
-                    <span class="process-dur">30 GÜN</span>
+                    <h3 class="process-title" data-i18n="proc4.t"></h3>
+                    <p class="process-text" data-i18n="proc4.d"></p>
+                    <span class="process-dur" data-i18n="proc4.dur"></span>
                 </div>
                 <div class="process-number">04</div>
             </div>
@@ -631,19 +603,15 @@
 
     <section id="acik">
         <div class="section-header">
-            <span class="section-tag">Açık Konuşalım</span>
-            <h2 class="section-title">Sınırları Biz Söyleyelim</h2>
+            <span class="section-tag" data-i18n="hon.tag"></span>
+            <h2 class="section-title" data-i18n="hon.title"></h2>
         </div>
         <div class="honest-container">
             <div class="honest-card">
                 <ul>
-                    <li><strong>Yerel modeller Claude ya da GPT değildir.</strong> Rutin işin büyük bölümünü
-                    güvenle taşırlar; en zor işler için neyin dışarı çıkacağını sizin belirlediğiniz
-                    kontrollü hibrit seçenek var.</li>
-                    <li><strong>Kalite donanımla ölçeklenir.</strong> Boyutlandırmayı satış için değil, gerçek
-                    eşzamanlı kullanıma göre yaparız — küçük başlayıp büyümek güvenlidir.</li>
-                    <li><strong>Yapay zekâ taslak üretir, imzayı ekibiniz atar.</strong> Çıktılar inceleme ve
-                    insan onayından geçer; bunu süreçle birlikte kurarız, yerine değil.</li>
+                    <li data-i18n-html="hon.1"></li>
+                    <li data-i18n-html="hon.2"></li>
+                    <li data-i18n-html="hon.3"></li>
                 </ul>
             </div>
         </div>
@@ -651,136 +619,599 @@
 
     <section>
         <div class="section-header">
-            <span class="section-tag">Teknik Özet</span>
-            <h2 class="section-title">BT'nin İlk Soracakları</h2>
+            <span class="section-tag" data-i18n="st.tag"></span>
+            <h2 class="section-title" data-i18n="st.title"></h2>
         </div>
         <div class="stats-container">
-            <div class="stat-item">
-                <div class="stat-value">UBUNTU + GPU</div>
-                <div class="stat-label">Sunucu</div>
-                <div class="stat-note">8–24GB VRAM sınıfı; büyüme yolu hazır</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-value">DOCKER ENGINE</div>
-                <div class="stat-label">Yazılım</div>
-                <div class="stat-note">açık kaynak yığın, sürümler sabit</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-value">2 PORT</div>
-                <div class="stat-label">Ağ</div>
-                <div class="stat-note">yalnız iç ağ; internet sadece kurulumda</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-value">0 BULUT</div>
-                <div class="stat-label">Bağımlılık</div>
-                <div class="stat-note">hesap yok, abonelik yok, veri çıkışı yok</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-value">WIN/MAC/LINUX</div>
-                <div class="stat-label">Kullanıcı Tarafı</div>
-                <div class="stat-note">geliştiriciye tek CLI; diğerlerine tarayıcı</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-value">₺0 LİSANS</div>
-                <div class="stat-label">Kullanıcı Başına</div>
-                <div class="stat-note">donanım bir kez, danışmanlık kapsam bazlı</div>
-            </div>
+            <div class="stat-item"><div class="stat-value">UBUNTU + GPU</div><div class="stat-label" data-i18n="st1.l"></div><div class="stat-note" data-i18n="st1.n"></div></div>
+            <div class="stat-item"><div class="stat-value">DOCKER ENGINE</div><div class="stat-label" data-i18n="st2.l"></div><div class="stat-note" data-i18n="st2.n"></div></div>
+            <div class="stat-item"><div class="stat-value" data-i18n="st3.v"></div><div class="stat-label" data-i18n="st3.l"></div><div class="stat-note" data-i18n="st3.n"></div></div>
+            <div class="stat-item"><div class="stat-value" data-i18n="st4.v"></div><div class="stat-label" data-i18n="st4.l"></div><div class="stat-note" data-i18n="st4.n"></div></div>
+            <div class="stat-item"><div class="stat-value">WIN/MAC/LINUX</div><div class="stat-label" data-i18n="st5.l"></div><div class="stat-note" data-i18n="st5.n"></div></div>
+            <div class="stat-item"><div class="stat-value" data-i18n="st6.v"></div><div class="stat-label" data-i18n="st6.l"></div><div class="stat-note" data-i18n="st6.n"></div></div>
         </div>
     </section>
 
-    <section class="cta-section">
+    <section class="cta-section" id="iletisim">
         <div class="cta-content">
-            <h2 class="cta-title">Kapıyı Açalım mı?</h2>
-            <p class="cta-subtitle">
-                30 dakikada canlı gösterelim — uçak modunda, kendi makinemizde.
-                Sonrası: 1 günlük değerlendirme ve size özel teklif.
-            </p>
+            <h2 class="cta-title" data-i18n="cta.title"></h2>
+            <p class="cta-subtitle" data-i18n="cta.sub"></p>
             <div class="cta-buttons">
-                <a class="btn-primary" href="mailto:esatelmas@gmail.com?subject=Gala%20demo%20talebi">Demo İsteyin</a>
-                <a class="btn-secondary" href="mailto:esatelmas@gmail.com?subject=Gala%20hakkinda">Soru Sorun</a>
+                <a class="btn-primary" href="mailto:esatelmas@gmail.com?subject=Gala%20demo" data-i18n="cta.b1"></a>
+                <a class="btn-secondary" href="mailto:esatelmas@gmail.com?subject=Gala" data-i18n="cta.b2"></a>
             </div>
         </div>
     </section>
 
     <footer>
         <div class="footer-bottom">
-            <p>GALA — YAPAY ZEKAYA AÇILAN KAPINIZ</p>
+            <p>GALA — <span data-i18n="footer.tag"></span></p>
             <p>&copy; 2026 ESAT ELMAS // <a href="mailto:esatelmas@gmail.com">esatelmas@gmail.com</a></p>
         </div>
     </footer>
 
-    <script>
-        // Navbar scroll effect
-        var navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', function () {
-            if (window.scrollY > 50) { navbar.classList.add('scrolled'); }
-            else { navbar.classList.remove('scrolled'); }
-        });
+<script>
+const LANGS = {
+  tr: 'Türkçe', en: 'English', de: 'Deutsch', fr: 'Français', es: 'Español',
+  it: 'Italiano', pt: 'Português', nl: 'Nederlands', pl: 'Polski', ru: 'Русский',
+  ar: 'العربية', ja: '日本語'
+};
 
-        // Terminal demo animation
-        (function () {
-            var lines = [
-                { t: "$ ping 8.8.8.8", c: "" },
-                { t: "Genel hata: ağ erişimi yok.", c: "t-red" },
-                { t: "", c: "" },
-                { t: "$ node index.js total", c: "" },
-                { t: "Total: 010.505        # bug: toplama yerine birleştirme", c: "t-dim" },
-                { t: "", c: "" },
-                { t: "$ opencode \"total komutundaki bug'ı düzelt\"", c: "" },
-                { t: "→ index.js okundu", c: "t-dim" },
-                { t: "← index.js düzenlendi (parseFloat eklendi)", c: "t-cyan" },
-                { t: "", c: "" },
-                { t: "$ node index.js total", c: "" },
-                { t: "Total: 15.5", c: "t-green" },
-                { t: "", c: "" },
-                { t: "✔ internete çıkan paket: 0", c: "t-green" }
-            ];
-            var el = document.getElementById('termbody');
-            var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            function render(upto, partial) {
-                var html = "";
-                for (var i = 0; i < upto; i++) {
-                    var l = lines[i];
-                    html += l.c ? '<span class="' + l.c + '">' + l.t + "</span>\n" : l.t + "\n";
-                }
-                if (partial !== undefined) {
-                    var p = lines[upto];
-                    var frag = p.t.slice(0, partial);
-                    html += p.c ? '<span class="' + p.c + '">' + frag + "</span>" : frag;
-                }
-                el.innerHTML = html + '<span class="cursor"></span>';
-            }
-            if (reduce) { render(lines.length); return; }
-            var li = 0;
-            function nextLine() {
-                if (li >= lines.length) { render(lines.length); return; }
-                var isCmd = lines[li].t.charAt(0) === "$";
-                if (isCmd) {
-                    var ch = 0;
-                    var iv = setInterval(function () {
-                        ch++;
-                        render(li, ch);
-                        if (ch >= lines[li].t.length) {
-                            clearInterval(iv); li++;
-                            setTimeout(nextLine, 420);
-                        }
-                    }, 26);
-                } else {
-                    li++;
-                    render(li);
-                    setTimeout(nextLine, lines[li - 1] && lines[li - 1].t === "" ? 140 : 340);
-                }
-            }
-            setTimeout(nextLine, 600);
-        })();
+const I18N = {
+tr: {
+  'meta.title':'GALA | Yapay Zekaya Açılan Kapınız','meta.desc':'Şirket içi yapay zekâ altyapısı: kod ve verileriniz dışarı çıkmadan, kullanıcı başına lisans ücreti olmadan. Gala · GalaChat · GalaFlow.',
+  'nav.products':'Ürünler','nav.why':'Neden','nav.process':'Süreç','nav.honest':'Açık Konuşalım','nav.cta':'Demo İste',
+  'hero.tag':'Şirket İçi Yapay Zekâ // KVKK Uyumlu','hero.t1':'Yapay Zekâ İçeri','hero.t2':'Veriniz İçeride',
+  'hero.desc':'Kod yazan ajan asistan, belgelerinizle konuşan iç sohbet, otomasyon akışları ve ekip bazlı bütçe kontrolü — hepsi kendi sunucunuzda. Kullanıcı başına lisans ücreti yok. İnternet bile şart değil: yandaki kayıt uçak modunda alındı.',
+  'hero.cta1':'Demo İsteyin','hero.cta2':'Ürünleri Gör','term.title':'DEMO // UÇAK MODU','term.badge':'✈ ÇEVRİMDIŞI',
+  'term.fail':'Genel hata: ağ erişimi yok.','term.bug':'Total: 010.505        # bug: toplama yerine birleştirme',
+  'term.cmd':'$ opencode "total komutundaki bug\'ı düzelt"','term.read':'→ index.js okundu','term.edit':'← index.js düzenlendi (parseFloat eklendi)','term.ok':'✔ internete çıkan paket: 0',
+  'prod.tag':'Ürün Ailesi','prod.title':'Kapıdan İçeri Üç Yol','prod.sub':'Aynı çekirdek altyapı — ağ geçidi, yerel modeller, bütçe kontrolü — üç farklı pakette.',
+  'p1.for':'// Yazılım şirketleri','p1.desc':'<strong>Kod yazan ajan asistan.</strong> Geliştiriciler terminalden dosya okuyup düzelten asistanla çalışır; analist, tester ve PO tarayıcıdan aynı altyapıyı kullanır.',
+  'p2.for':'// Yazılım geliştirmeyen firmalar','p2.desc':'<strong>Belgelerinizle konuşan iç asistan.</strong> Yönetmelik ve sözleşmelerinizi yükleyin; personel sorusuna belgeye dayalı, kaynak gösteren cevap alsın. Belgede olmayana "belgede yok" der.',
+  'p3.for':'// Otomasyon ihtiyacı olanlar','p3.desc':'<strong>İş akışlarınızı otomatikleştiren ajanlar.</strong> E-posta özetleme ve taslak yanıt, belgeden veri çıkarma, periyodik raporlar — aynı bütçe kontrolüyle.',
+  'status.avail':'● SATIŞTA',
+  'feat.tag':'Neden Gala','feat.title':'Sızıntı Yok · Fatura Yok','feat.sub':'Ekipler bugün ya kodu buluta yapıştırıp gizliliği göze alıyor ya da yapay zekâdan uzak durup geride kalıyor. İkisi de kabul edilebilir değil.',
+  'f1.t':'Veri İçeride','f1.d':'Modeller kendi sunucunuzda çalışır. İstemler, kod ve belgeler hiçbir dış servise gitmez; kapalı ağda dahi çalışır.',
+  'f2.t':'Lisans Ücreti Yok','f2.d':'Açık kaynak yığın: kullanıcı, ay veya token başına ücret yok. Bir donanım yatırımı; kullanım arttıkça maliyet artmaz.',
+  'f3.t':'İş Yapan Ajan','f3.d':'Sohbet kutusu değil: dosyayı bulan, okuyan, düzelten ve kaynak gösteren asistanlar. Çıktı her zaman insan onayından geçer.',
+  'f4.t':'Kontrol Yönetimde','f4.d':'Ekip başına anahtar ve bütçe; kim, hangi model, ne kadar — panoda. Ayrılan personelin anahtarı tek komutla iptal.',
+  'proc.tag':'Kurulum Protokolü','proc.title':'Anahtar Teslim Süreç',
+  'proc1.t':'Değerlendirme','proc1.d':'Ekip, donanım, ağ ve süreç analizi; boyutlandırma önerisi ve teklif.','proc1.dur':'1 GÜN',
+  'proc2.t':'Kurulum','proc2.d':'Sunucu, modeller, anahtar/bütçe yapısı ve uçtan uca doğrulama testleri.','proc2.dur':'1–2 GÜN',
+  'proc3.t':'Eğitim','proc3.d':'Rol bazlı uygulamalı eğitim — gerçek işlerinizle, slaytsız.','proc3.dur':'YARIM–2 GÜN',
+  'proc4.t':'Destek & Devir','proc4.d':'30 gün uzaktan destek, işletim devri ve Türkçe dokümantasyon.','proc4.dur':'30 GÜN',
+  'hon.tag':'Açık Konuşalım','hon.title':'Sınırları Biz Söyleyelim',
+  'hon.1':'<strong>Yerel modeller Claude ya da GPT değildir.</strong> Rutin işin büyük bölümünü güvenle taşırlar; en zor işler için neyin dışarı çıkacağını sizin belirlediğiniz kontrollü hibrit seçenek var.',
+  'hon.2':'<strong>Kalite donanımla ölçeklenir.</strong> Boyutlandırmayı satış için değil, gerçek eşzamanlı kullanıma göre yaparız — küçük başlayıp büyümek güvenlidir.',
+  'hon.3':'<strong>Yapay zekâ taslak üretir, imzayı ekibiniz atar.</strong> Çıktılar inceleme ve insan onayından geçer; bunu süreçle birlikte kurarız, yerine değil.',
+  'st.tag':'Teknik Özet','st.title':"BT'nin İlk Soracakları",
+  'st1.l':'Sunucu','st1.n':'8–24GB VRAM sınıfı; büyüme yolu hazır','st2.l':'Yazılım','st2.n':'açık kaynak yığın, sürümler sabit',
+  'st3.v':'2 PORT','st3.l':'Ağ','st3.n':'yalnız iç ağ; internet sadece kurulumda',
+  'st4.v':'0 BULUT','st4.l':'Bağımlılık','st4.n':'hesap yok, abonelik yok, veri çıkışı yok',
+  'st5.l':'Kullanıcı Tarafı','st5.n':'geliştiriciye tek CLI; diğerlerine tarayıcı',
+  'st6.v':'₺0 LİSANS','st6.l':'Kullanıcı Başına','st6.n':'donanım bir kez, danışmanlık kapsam bazlı',
+  'cta.title':'Kapıyı Açalım mı?','cta.sub':'30 dakikada canlı gösterelim — uçak modunda, kendi makinemizde. Sonrası: 1 günlük değerlendirme ve size özel teklif.',
+  'cta.b1':'Demo İsteyin','cta.b2':'Soru Sorun','footer.tag':'Yapay Zekaya Açılan Kapınız'
+},
+en: {
+  'meta.title':'GALA | Your Gateway to AI','meta.desc':'On-premises AI infrastructure: your code and data never leave, no per-user license fees. Gala · GalaChat · GalaFlow.',
+  'nav.products':'Products','nav.why':'Why','nav.process':'Process','nav.honest':'Straight Talk','nav.cta':'Book a Demo',
+  'hero.tag':'On-Prem AI // Privacy First','hero.t1':'AI Comes In','hero.t2':'Data Stays In',
+  'hero.desc':'A coding agent for developers, chat with your company documents, automation flows and per-team budget control — all on your own server. No per-user fees. Not even internet required: the recording here was captured in airplane mode.',
+  'hero.cta1':'Book a Demo','hero.cta2':'See Products','term.title':'DEMO // AIRPLANE MODE','term.badge':'✈ OFFLINE',
+  'term.fail':'General failure: network unreachable.','term.bug':'Total: 010.505        # the bug: concat instead of sum',
+  'term.cmd':'$ opencode "fix the bug in the total command"','term.read':'→ reading index.js','term.edit':'← index.js edited (parseFloat added)','term.ok':'✔ packets sent to the internet: 0',
+  'prod.tag':'Product Family','prod.title':'Three Ways Through the Gate','prod.sub':'One core platform — gateway, local models, budget control — in three packages.',
+  'p1.for':'// Software companies','p1.desc':'<strong>An AI coding agent.</strong> Developers work with an assistant that reads and edits files from the terminal; analysts, testers and POs use the same platform from a browser.',
+  'p2.for':'// Companies that don\'t build software','p2.desc':'<strong>An assistant that knows your documents.</strong> Upload policies and contracts; staff get answers grounded in your documents, with citations. If it\'s not in the document, it says so.',
+  'p3.for':'// Automation needs','p3.desc':'<strong>Agents that automate your workflows.</strong> Email summaries and reply drafts, data extraction from documents, scheduled reports — under the same budget control.',
+  'status.avail':'● AVAILABLE NOW',
+  'feat.tag':'Why Gala','feat.title':'No Leaks · No Bills','feat.sub':'Teams today either paste code into the cloud and gamble with privacy, or avoid AI and fall behind. Neither is acceptable.',
+  'f1.t':'Data Stays Inside','f1.d':'Models run on your own server. Prompts, code and documents never reach an external service; works even on air-gapped networks.',
+  'f2.t':'No License Fees','f2.d':'An open-source stack: no per-user, per-month or per-token fees. One hardware investment; cost stays flat as usage grows.',
+  'f3.t':'Agents That Work','f3.d':'Not a chat box: assistants that find, read and edit files and cite their sources. Output always passes human review.',
+  'f4.t':'Management in Control','f4.d':'Keys and budgets per team; who, which model, how much — on one dashboard. Revoke a leaver\'s key with one command.',
+  'proc.tag':'Installation Protocol','proc.title':'Turnkey Process',
+  'proc1.t':'Assessment','proc1.d':'Team, hardware, network and process analysis; sizing recommendation and proposal.','proc1.dur':'1 DAY',
+  'proc2.t':'Installation','proc2.d':'Server, models, key/budget structure and end-to-end verification tests.','proc2.dur':'1–2 DAYS',
+  'proc3.t':'Training','proc3.d':'Hands-on, role-based training — with your real work, no slides.','proc3.dur':'0.5–2 DAYS',
+  'proc4.t':'Support & Handover','proc4.d':'30 days of remote support, operational handover and documentation.','proc4.dur':'30 DAYS',
+  'hon.tag':'Straight Talk','hon.title':'We\'ll Name the Limits',
+  'hon.1':'<strong>Local models are not Claude or GPT.</strong> They carry most routine work reliably; for the hardest tasks there is a controlled hybrid option where you decide what leaves.',
+  'hon.2':'<strong>Quality scales with hardware.</strong> We size for real concurrent usage, not for the sale — starting small and growing is safe.',
+  'hon.3':'<strong>AI drafts, your team signs.</strong> Output goes through review and human approval; we build that into your process, not instead of it.',
+  'st.tag':'Technical Summary','st.title':'What IT Asks First',
+  'st1.l':'Server','st1.n':'8–24GB VRAM class; growth path ready','st2.l':'Software','st2.n':'open-source stack, pinned versions',
+  'st3.v':'2 PORTS','st3.l':'Network','st3.n':'internal only; internet needed only during install',
+  'st4.v':'0 CLOUD','st4.l':'Dependencies','st4.n':'no accounts, no subscriptions, no data egress',
+  'st5.l':'User Side','st5.n':'one CLI for developers; a browser for everyone else',
+  'st6.v':'$0 LICENSE','st6.l':'Per User','st6.n':'hardware once, consulting by scope',
+  'cta.title':'Shall We Open the Gate?','cta.sub':'A 30-minute live demo — in airplane mode, on our own machine. Then: a 1-day assessment and a proposal sized for you.',
+  'cta.b1':'Book a Demo','cta.b2':'Ask a Question','footer.tag':'Your Gateway to AI'
+},
+de: {
+  'meta.title':'GALA | Ihr Tor zur KI','meta.desc':'KI-Infrastruktur im eigenen Haus: Code und Daten verlassen das Unternehmen nicht, keine Lizenzgebühren pro Nutzer. Gala · GalaChat · GalaFlow.',
+  'nav.products':'Produkte','nav.why':'Warum','nav.process':'Ablauf','nav.honest':'Klartext','nav.cta':'Demo anfragen',
+  'hero.tag':'On-Prem-KI // DSGVO-freundlich','hero.t1':'KI kommt rein','hero.t2':'Daten bleiben drin',
+  'hero.desc':'Ein Coding-Agent für Entwickler, Chat mit Ihren Unternehmensdokumenten, Automatisierungs-Flows und Budgetkontrolle pro Team — alles auf Ihrem eigenen Server. Keine Gebühren pro Nutzer. Nicht einmal Internet nötig: die Aufnahme hier entstand im Flugmodus.',
+  'hero.cta1':'Demo anfragen','hero.cta2':'Produkte ansehen','term.title':'DEMO // FLUGMODUS','term.badge':'✈ OFFLINE',
+  'term.fail':'Fehler: Netzwerk nicht erreichbar.','term.bug':'Total: 010.505        # der Bug: Verkettung statt Summe',
+  'term.cmd':'$ opencode "behebe den Bug im total-Befehl"','term.read':'→ index.js gelesen','term.edit':'← index.js bearbeitet (parseFloat ergänzt)','term.ok':'✔ Pakete ins Internet gesendet: 0',
+  'prod.tag':'Produktfamilie','prod.title':'Drei Wege durchs Tor','prod.sub':'Eine Kernplattform — Gateway, lokale Modelle, Budgetkontrolle — in drei Paketen.',
+  'p1.for':'// Softwareunternehmen','p1.desc':'<strong>Ein KI-Coding-Agent.</strong> Entwickler arbeiten mit einem Assistenten, der Dateien im Terminal liest und bearbeitet; Analysten, Tester und POs nutzen dieselbe Plattform im Browser.',
+  'p2.for':'// Unternehmen ohne Softwareentwicklung','p2.desc':'<strong>Ein Assistent, der Ihre Dokumente kennt.</strong> Laden Sie Richtlinien und Verträge hoch; Mitarbeitende erhalten belegte Antworten mit Quellenangabe. Steht es nicht im Dokument, sagt er das.',
+  'p3.for':'// Automatisierungsbedarf','p3.desc':'<strong>Agenten, die Ihre Abläufe automatisieren.</strong> E-Mail-Zusammenfassungen und Antwortentwürfe, Datenextraktion aus Dokumenten, geplante Berichte — unter derselben Budgetkontrolle.',
+  'status.avail':'● VERFÜGBAR',
+  'feat.tag':'Warum Gala','feat.title':'Keine Lecks · Keine Rechnungen','feat.sub':'Teams kleben heute entweder Code in die Cloud und riskieren die Vertraulichkeit — oder meiden KI und fallen zurück. Beides ist inakzeptabel.',
+  'f1.t':'Daten bleiben intern','f1.d':'Die Modelle laufen auf Ihrem eigenen Server. Prompts, Code und Dokumente erreichen nie einen externen Dienst; funktioniert auch in isolierten Netzen.',
+  'f2.t':'Keine Lizenzgebühren','f2.d':'Open-Source-Stack: keine Gebühren pro Nutzer, Monat oder Token. Eine Hardware-Investition; die Kosten bleiben konstant.',
+  'f3.t':'Agenten, die arbeiten','f3.d':'Keine Chatbox: Assistenten, die Dateien finden, lesen, bearbeiten und Quellen nennen. Ausgaben durchlaufen immer menschliche Prüfung.',
+  'f4.t':'Kontrolle beim Management','f4.d':'Schlüssel und Budgets pro Team; wer, welches Modell, wie viel — auf einem Dashboard. Schlüssel Ausscheidender mit einem Befehl widerrufen.',
+  'proc.tag':'Installationsprotokoll','proc.title':'Schlüsselfertiger Ablauf',
+  'proc1.t':'Analyse','proc1.d':'Team-, Hardware-, Netzwerk- und Prozessanalyse; Dimensionierung und Angebot.','proc1.dur':'1 TAG',
+  'proc2.t':'Installation','proc2.d':'Server, Modelle, Schlüssel-/Budgetstruktur und End-to-End-Verifikation.','proc2.dur':'1–2 TAGE',
+  'proc3.t':'Schulung','proc3.d':'Praxisnahe, rollenbasierte Schulung — mit Ihrer echten Arbeit, ohne Folien.','proc3.dur':'0,5–2 TAGE',
+  'proc4.t':'Support & Übergabe','proc4.d':'30 Tage Remote-Support, Betriebsübergabe und Dokumentation.','proc4.dur':'30 TAGE',
+  'hon.tag':'Klartext','hon.title':'Wir nennen die Grenzen',
+  'hon.1':'<strong>Lokale Modelle sind nicht Claude oder GPT.</strong> Sie tragen den Großteil der Routinearbeit zuverlässig; für die härtesten Aufgaben gibt es eine kontrollierte Hybrid-Option, bei der Sie entscheiden, was das Haus verlässt.',
+  'hon.2':'<strong>Qualität skaliert mit Hardware.</strong> Wir dimensionieren nach realer paralleler Nutzung, nicht für den Verkauf — klein anfangen und wachsen ist sicher.',
+  'hon.3':'<strong>KI entwirft, Ihr Team unterschreibt.</strong> Ausgaben durchlaufen Review und menschliche Freigabe; das bauen wir in Ihren Prozess ein, nicht an ihm vorbei.',
+  'st.tag':'Technische Übersicht','st.title':'Was die IT zuerst fragt',
+  'st1.l':'Server','st1.n':'8–24GB-VRAM-Klasse; Wachstumspfad vorhanden','st2.l':'Software','st2.n':'Open-Source-Stack, fixierte Versionen',
+  'st3.v':'2 PORTS','st3.l':'Netzwerk','st3.n':'nur intern; Internet nur bei der Installation',
+  'st4.v':'0 CLOUD','st4.l':'Abhängigkeiten','st4.n':'keine Konten, keine Abos, kein Datenabfluss',
+  'st5.l':'Nutzerseite','st5.n':'eine CLI für Entwickler; Browser für alle anderen',
+  'st6.v':'0€ LIZENZ','st6.l':'Pro Nutzer','st6.n':'Hardware einmalig, Beratung nach Umfang',
+  'cta.title':'Öffnen wir das Tor?','cta.sub':'Eine 30-minütige Live-Demo — im Flugmodus, auf unserer eigenen Maschine. Danach: 1 Tag Analyse und ein passgenaues Angebot.',
+  'cta.b1':'Demo anfragen','cta.b2':'Frage stellen','footer.tag':'Ihr Tor zur KI'
+},
+fr: {
+  'meta.title':'GALA | Votre porte vers l\'IA','meta.desc':'Infrastructure IA sur site : votre code et vos données ne sortent jamais, sans licence par utilisateur. Gala · GalaChat · GalaFlow.',
+  'nav.products':'Produits','nav.why':'Pourquoi','nav.process':'Processus','nav.honest':'Parlons franchement','nav.cta':'Demander une démo',
+  'hero.tag':'IA sur site // RGPD-compatible','hero.t1':'L\'IA entre','hero.t2':'Vos données restent',
+  'hero.desc':'Un agent de codage pour les développeurs, un chat avec vos documents d\'entreprise, des flux d\'automatisation et un contrôle budgétaire par équipe — le tout sur votre propre serveur. Sans frais par utilisateur. Même Internet n\'est pas requis : l\'enregistrement ci-contre a été réalisé en mode avion.',
+  'hero.cta1':'Demander une démo','hero.cta2':'Voir les produits','term.title':'DÉMO // MODE AVION','term.badge':'✈ HORS LIGNE',
+  'term.fail':'Échec : réseau inaccessible.','term.bug':'Total: 010.505        # le bug : concaténation au lieu d\'addition',
+  'term.cmd':'$ opencode "corrige le bug de la commande total"','term.read':'→ lecture de index.js','term.edit':'← index.js modifié (parseFloat ajouté)','term.ok':'✔ paquets envoyés vers Internet : 0',
+  'prod.tag':'Gamme de produits','prod.title':'Trois chemins par la porte','prod.sub':'Une même plateforme — passerelle, modèles locaux, contrôle budgétaire — en trois offres.',
+  'p1.for':'// Éditeurs de logiciels','p1.desc':'<strong>Un agent de codage IA.</strong> Les développeurs travaillent avec un assistant qui lit et modifie les fichiers depuis le terminal ; analystes, testeurs et PO utilisent la même plateforme depuis un navigateur.',
+  'p2.for':'// Entreprises hors développement','p2.desc':'<strong>Un assistant qui connaît vos documents.</strong> Chargez règlements et contrats ; le personnel obtient des réponses fondées sur vos documents, avec citations. Si ce n\'est pas dans le document, il le dit.',
+  'p3.for':'// Besoins d\'automatisation','p3.desc':'<strong>Des agents qui automatisent vos processus.</strong> Résumés d\'e-mails et brouillons de réponse, extraction de données, rapports planifiés — sous le même contrôle budgétaire.',
+  'status.avail':'● DISPONIBLE',
+  'feat.tag':'Pourquoi Gala','feat.title':'Zéro fuite · Zéro facture','feat.sub':'Aujourd\'hui, les équipes collent leur code dans le cloud au risque de la confidentialité, ou évitent l\'IA et prennent du retard. Aucune des deux options n\'est acceptable.',
+  'f1.t':'Les données restent','f1.d':'Les modèles tournent sur votre serveur. Prompts, code et documents n\'atteignent jamais un service externe ; fonctionne même en réseau isolé.',
+  'f2.t':'Sans licence','f2.d':'Une pile open source : aucun coût par utilisateur, par mois ou par token. Un seul investissement matériel ; le coût reste stable.',
+  'f3.t':'Des agents qui agissent','f3.d':'Pas une simple boîte de chat : des assistants qui trouvent, lisent, modifient des fichiers et citent leurs sources. La sortie passe toujours par une revue humaine.',
+  'f4.t':'Le contrôle à la direction','f4.d':'Clés et budgets par équipe ; qui, quel modèle, combien — sur un tableau de bord. Révoquez la clé d\'un partant en une commande.',
+  'proc.tag':'Protocole d\'installation','proc.title':'Processus clé en main',
+  'proc1.t':'Évaluation','proc1.d':'Analyse équipe, matériel, réseau et processus ; dimensionnement et proposition.','proc1.dur':'1 JOUR',
+  'proc2.t':'Installation','proc2.d':'Serveur, modèles, structure clés/budgets et tests de bout en bout.','proc2.dur':'1–2 JOURS',
+  'proc3.t':'Formation','proc3.d':'Formation pratique par rôle — sur vos vraies tâches, sans diapositives.','proc3.dur':'0,5–2 JOURS',
+  'proc4.t':'Support & transfert','proc4.d':'30 jours de support à distance, transfert d\'exploitation et documentation.','proc4.dur':'30 JOURS',
+  'hon.tag':'Parlons franchement','hon.title':'Nous nommons les limites',
+  'hon.1':'<strong>Les modèles locaux ne sont pas Claude ni GPT.</strong> Ils portent l\'essentiel du travail courant ; pour les tâches les plus dures, une option hybride contrôlée où vous décidez de ce qui sort.',
+  'hon.2':'<strong>La qualité suit le matériel.</strong> Nous dimensionnons selon l\'usage réel, pas pour vendre — commencer petit puis grandir est sans risque.',
+  'hon.3':'<strong>L\'IA rédige, votre équipe signe.</strong> Les sorties passent par revue et validation humaine ; nous l\'intégrons à votre processus, pas à sa place.',
+  'st.tag':'Résumé technique','st.title':'Les premières questions de la DSI',
+  'st1.l':'Serveur','st1.n':'classe 8–24 Go VRAM ; évolutif','st2.l':'Logiciel','st2.n':'pile open source, versions figées',
+  'st3.v':'2 PORTS','st3.l':'Réseau','st3.n':'interne uniquement ; Internet seulement à l\'installation',
+  'st4.v':'0 CLOUD','st4.l':'Dépendances','st4.n':'pas de compte, pas d\'abonnement, pas de sortie de données',
+  'st5.l':'Côté utilisateur','st5.n':'une CLI pour les développeurs ; un navigateur pour les autres',
+  'st6.v':'0€ LICENCE','st6.l':'Par utilisateur','st6.n':'matériel une fois, conseil selon périmètre',
+  'cta.title':'On ouvre la porte ?','cta.sub':'Une démo live de 30 minutes — en mode avion, sur notre propre machine. Ensuite : une évaluation d\'un jour et une proposition sur mesure.',
+  'cta.b1':'Demander une démo','cta.b2':'Poser une question','footer.tag':'Votre porte vers l\'IA'
+},
+es: {
+  'meta.title':'GALA | Tu puerta a la IA','meta.desc':'Infraestructura de IA en tus instalaciones: tu código y tus datos nunca salen, sin licencias por usuario. Gala · GalaChat · GalaFlow.',
+  'nav.products':'Productos','nav.why':'Por qué','nav.process':'Proceso','nav.honest':'Hablemos claro','nav.cta':'Pedir demo',
+  'hero.tag':'IA local // Privacidad primero','hero.t1':'La IA entra','hero.t2':'Tus datos se quedan',
+  'hero.desc':'Un agente de código para desarrolladores, chat con tus documentos corporativos, flujos de automatización y control de presupuesto por equipo — todo en tu propio servidor. Sin cuotas por usuario. Ni siquiera hace falta Internet: esta grabación se hizo en modo avión.',
+  'hero.cta1':'Pedir demo','hero.cta2':'Ver productos','term.title':'DEMO // MODO AVIÓN','term.badge':'✈ SIN CONEXIÓN',
+  'term.fail':'Error: red inaccesible.','term.bug':'Total: 010.505        # el bug: concatena en vez de sumar',
+  'term.cmd':'$ opencode "arregla el bug del comando total"','term.read':'→ leyendo index.js','term.edit':'← index.js editado (parseFloat añadido)','term.ok':'✔ paquetes enviados a Internet: 0',
+  'prod.tag':'Familia de productos','prod.title':'Tres caminos por la puerta','prod.sub':'Una misma plataforma — gateway, modelos locales, control de presupuesto — en tres paquetes.',
+  'p1.for':'// Empresas de software','p1.desc':'<strong>Un agente de código con IA.</strong> Los desarrolladores trabajan con un asistente que lee y edita archivos desde la terminal; analistas, testers y PO usan la misma plataforma desde el navegador.',
+  'p2.for':'// Empresas que no desarrollan software','p2.desc':'<strong>Un asistente que conoce tus documentos.</strong> Sube normativas y contratos; el personal recibe respuestas basadas en tus documentos, con citas. Si no está en el documento, lo dice.',
+  'p3.for':'// Necesidades de automatización','p3.desc':'<strong>Agentes que automatizan tus procesos.</strong> Resúmenes de correo y borradores de respuesta, extracción de datos de documentos, informes programados — bajo el mismo control de presupuesto.',
+  'status.avail':'● DISPONIBLE',
+  'feat.tag':'Por qué Gala','feat.title':'Sin fugas · Sin facturas','feat.sub':'Hoy los equipos pegan su código en la nube arriesgando la confidencialidad, o evitan la IA y se quedan atrás. Ninguna opción es aceptable.',
+  'f1.t':'Los datos se quedan','f1.d':'Los modelos corren en tu propio servidor. Prompts, código y documentos nunca llegan a un servicio externo; funciona incluso en redes aisladas.',
+  'f2.t':'Sin licencias','f2.d':'Pila open source: sin cuotas por usuario, mes o token. Una sola inversión en hardware; el coste no crece con el uso.',
+  'f3.t':'Agentes que trabajan','f3.d':'No es un chat: asistentes que encuentran, leen y editan archivos y citan sus fuentes. La salida siempre pasa revisión humana.',
+  'f4.t':'El control, en dirección','f4.d':'Claves y presupuestos por equipo; quién, qué modelo, cuánto — en un panel. Revoca la clave de una baja con un comando.',
+  'proc.tag':'Protocolo de instalación','proc.title':'Proceso llave en mano',
+  'proc1.t':'Evaluación','proc1.d':'Análisis de equipo, hardware, red y procesos; dimensionamiento y propuesta.','proc1.dur':'1 DÍA',
+  'proc2.t':'Instalación','proc2.d':'Servidor, modelos, estructura de claves/presupuestos y pruebas de extremo a extremo.','proc2.dur':'1–2 DÍAS',
+  'proc3.t':'Formación','proc3.d':'Formación práctica por rol — con tu trabajo real, sin diapositivas.','proc3.dur':'0,5–2 DÍAS',
+  'proc4.t':'Soporte y entrega','proc4.d':'30 días de soporte remoto, entrega operativa y documentación.','proc4.dur':'30 DÍAS',
+  'hon.tag':'Hablemos claro','hon.title':'Nosotros ponemos los límites sobre la mesa',
+  'hon.1':'<strong>Los modelos locales no son Claude ni GPT.</strong> Cubren con solvencia la mayor parte del trabajo rutinario; para lo más difícil hay una opción híbrida controlada donde tú decides qué sale.',
+  'hon.2':'<strong>La calidad escala con el hardware.</strong> Dimensionamos según el uso concurrente real, no para vender — empezar pequeño y crecer es seguro.',
+  'hon.3':'<strong>La IA redacta, tu equipo firma.</strong> La salida pasa por revisión y aprobación humana; lo integramos en tu proceso, no en su lugar.',
+  'st.tag':'Resumen técnico','st.title':'Lo primero que pregunta TI',
+  'st1.l':'Servidor','st1.n':'clase 8–24GB VRAM; con ruta de crecimiento','st2.l':'Software','st2.n':'pila open source, versiones fijadas',
+  'st3.v':'2 PUERTOS','st3.l':'Red','st3.n':'solo interna; Internet solo durante la instalación',
+  'st4.v':'0 NUBE','st4.l':'Dependencias','st4.n':'sin cuentas, sin suscripciones, sin salida de datos',
+  'st5.l':'Lado del usuario','st5.n':'una CLI para desarrolladores; navegador para el resto',
+  'st6.v':'0€ LICENCIA','st6.l':'Por usuario','st6.n':'hardware una vez, consultoría por alcance',
+  'cta.title':'¿Abrimos la puerta?','cta.sub':'Una demo en vivo de 30 minutos — en modo avión, en nuestra propia máquina. Después: una evaluación de 1 día y una propuesta a tu medida.',
+  'cta.b1':'Pedir demo','cta.b2':'Hacer una pregunta','footer.tag':'Tu puerta a la IA'
+},
+it: {
+  'meta.title':'GALA | La tua porta verso l\'IA','meta.desc':'Infrastruttura IA on-premises: codice e dati non escono mai, senza licenze per utente. Gala · GalaChat · GalaFlow.',
+  'nav.products':'Prodotti','nav.why':'Perché','nav.process':'Processo','nav.honest':'Parliamoci chiaro','nav.cta':'Richiedi demo',
+  'hero.tag':'IA on-prem // Privacy al primo posto','hero.t1':'L\'IA entra','hero.t2':'I dati restano',
+  'hero.desc':'Un agente di codifica per gli sviluppatori, chat con i documenti aziendali, flussi di automazione e controllo budget per team — tutto sul vostro server. Nessun costo per utente. Non serve nemmeno Internet: questa registrazione è stata fatta in modalità aereo.',
+  'hero.cta1':'Richiedi una demo','hero.cta2':'Vedi i prodotti','term.title':'DEMO // MODALITÀ AEREO','term.badge':'✈ OFFLINE',
+  'term.fail':'Errore: rete non raggiungibile.','term.bug':'Total: 010.505        # il bug: concatena invece di sommare',
+  'term.cmd':'$ opencode "correggi il bug del comando total"','term.read':'→ lettura di index.js','term.edit':'← index.js modificato (aggiunto parseFloat)','term.ok':'✔ pacchetti inviati a Internet: 0',
+  'prod.tag':'Famiglia di prodotti','prod.title':'Tre vie attraverso la porta','prod.sub':'Una sola piattaforma — gateway, modelli locali, controllo budget — in tre pacchetti.',
+  'p1.for':'// Aziende software','p1.desc':'<strong>Un agente di codifica IA.</strong> Gli sviluppatori lavorano con un assistente che legge e modifica i file dal terminale; analisti, tester e PO usano la stessa piattaforma dal browser.',
+  'p2.for':'// Aziende che non sviluppano software','p2.desc':'<strong>Un assistente che conosce i vostri documenti.</strong> Caricate regolamenti e contratti; il personale riceve risposte fondate sui documenti, con citazioni. Se non è nel documento, lo dice.',
+  'p3.for':'// Esigenze di automazione','p3.desc':'<strong>Agenti che automatizzano i processi.</strong> Riassunti email e bozze di risposta, estrazione dati dai documenti, report pianificati — sotto lo stesso controllo budget.',
+  'status.avail':'● DISPONIBILE',
+  'feat.tag':'Perché Gala','feat.title':'Zero fughe · Zero bollette','feat.sub':'Oggi i team incollano il codice nel cloud rischiando la riservatezza, oppure evitano l\'IA e restano indietro. Nessuna delle due è accettabile.',
+  'f1.t':'I dati restano dentro','f1.d':'I modelli girano sul vostro server. Prompt, codice e documenti non raggiungono mai un servizio esterno; funziona anche su reti isolate.',
+  'f2.t':'Zero licenze','f2.d':'Stack open source: nessun costo per utente, mese o token. Un solo investimento hardware; il costo resta piatto.',
+  'f3.t':'Agenti che lavorano','f3.d':'Non una chat: assistenti che trovano, leggono e modificano file citando le fonti. L\'output passa sempre da revisione umana.',
+  'f4.t':'Il controllo alla direzione','f4.d':'Chiavi e budget per team; chi, quale modello, quanto — in un pannello. La chiave di chi lascia si revoca con un comando.',
+  'proc.tag':'Protocollo di installazione','proc.title':'Processo chiavi in mano',
+  'proc1.t':'Valutazione','proc1.d':'Analisi di team, hardware, rete e processi; dimensionamento e proposta.','proc1.dur':'1 GIORNO',
+  'proc2.t':'Installazione','proc2.d':'Server, modelli, struttura chiavi/budget e verifiche end-to-end.','proc2.dur':'1–2 GIORNI',
+  'proc3.t':'Formazione','proc3.d':'Formazione pratica per ruolo — sul vostro lavoro reale, senza slide.','proc3.dur':'0,5–2 GIORNI',
+  'proc4.t':'Supporto e consegna','proc4.d':'30 giorni di supporto remoto, passaggio operativo e documentazione.','proc4.dur':'30 GIORNI',
+  'hon.tag':'Parliamoci chiaro','hon.title':'I limiti li diciamo noi',
+  'hon.1':'<strong>I modelli locali non sono Claude né GPT.</strong> Coprono con affidabilità gran parte del lavoro di routine; per i compiti più difficili c\'è un\'opzione ibrida controllata in cui decidete voi cosa esce.',
+  'hon.2':'<strong>La qualità scala con l\'hardware.</strong> Dimensioniamo sull\'uso concorrente reale, non per vendere — partire piccoli e crescere è sicuro.',
+  'hon.3':'<strong>L\'IA scrive la bozza, il vostro team firma.</strong> L\'output passa da revisione e approvazione umana; lo integriamo nel vostro processo, non al suo posto.',
+  'st.tag':'Sintesi tecnica','st.title':'Le prime domande dell\'IT',
+  'st1.l':'Server','st1.n':'classe 8–24GB VRAM; percorso di crescita pronto','st2.l':'Software','st2.n':'stack open source, versioni bloccate',
+  'st3.v':'2 PORTE','st3.l':'Rete','st3.n':'solo interna; Internet solo per l\'installazione',
+  'st4.v':'0 CLOUD','st4.l':'Dipendenze','st4.n':'niente account, niente abbonamenti, nessuna uscita di dati',
+  'st5.l':'Lato utente','st5.n':'una CLI per gli sviluppatori; browser per gli altri',
+  'st6.v':'0€ LICENZE','st6.l':'Per utente','st6.n':'hardware una tantum, consulenza a perimetro',
+  'cta.title':'Apriamo la porta?','cta.sub':'Una demo dal vivo di 30 minuti — in modalità aereo, sulla nostra macchina. Poi: una valutazione di 1 giorno e una proposta su misura.',
+  'cta.b1':'Richiedi una demo','cta.b2':'Fai una domanda','footer.tag':'La tua porta verso l\'IA'
+},
+pt: {
+  'meta.title':'GALA | Sua porta de entrada para a IA','meta.desc':'Infraestrutura de IA no local: seu código e seus dados nunca saem, sem licenças por usuário. Gala · GalaChat · GalaFlow.',
+  'nav.products':'Produtos','nav.why':'Por quê','nav.process':'Processo','nav.honest':'Papo reto','nav.cta':'Pedir demo',
+  'hero.tag':'IA on-premises // Privacidade em primeiro lugar','hero.t1':'A IA entra','hero.t2':'Seus dados ficam',
+  'hero.desc':'Um agente de código para desenvolvedores, chat com os documentos da empresa, fluxos de automação e controle de orçamento por equipe — tudo no seu próprio servidor. Sem taxas por usuário. Nem Internet é necessária: esta gravação foi feita em modo avião.',
+  'hero.cta1':'Pedir uma demo','hero.cta2':'Ver produtos','term.title':'DEMO // MODO AVIÃO','term.badge':'✈ OFFLINE',
+  'term.fail':'Falha: rede inacessível.','term.bug':'Total: 010.505        # o bug: concatena em vez de somar',
+  'term.cmd':'$ opencode "corrija o bug do comando total"','term.read':'→ lendo index.js','term.edit':'← index.js editado (parseFloat adicionado)','term.ok':'✔ pacotes enviados à Internet: 0',
+  'prod.tag':'Família de produtos','prod.title':'Três caminhos pela porta','prod.sub':'Uma mesma plataforma — gateway, modelos locais, controle de orçamento — em três pacotes.',
+  'p1.for':'// Empresas de software','p1.desc':'<strong>Um agente de código com IA.</strong> Desenvolvedores trabalham com um assistente que lê e edita arquivos no terminal; analistas, testers e POs usam a mesma plataforma pelo navegador.',
+  'p2.for':'// Empresas que não desenvolvem software','p2.desc':'<strong>Um assistente que conhece seus documentos.</strong> Envie normas e contratos; a equipe recebe respostas baseadas nos documentos, com citações. Se não está no documento, ele diz.',
+  'p3.for':'// Necessidades de automação','p3.desc':'<strong>Agentes que automatizam seus fluxos.</strong> Resumos de e-mail e rascunhos de resposta, extração de dados de documentos, relatórios agendados — sob o mesmo controle de orçamento.',
+  'status.avail':'● DISPONÍVEL',
+  'feat.tag':'Por que Gala','feat.title':'Sem vazamentos · Sem faturas','feat.sub':'Hoje as equipes colam código na nuvem arriscando o sigilo, ou evitam a IA e ficam para trás. Nenhuma das opções é aceitável.',
+  'f1.t':'Os dados ficam dentro','f1.d':'Os modelos rodam no seu servidor. Prompts, código e documentos nunca chegam a um serviço externo; funciona até em redes isoladas.',
+  'f2.t':'Sem licenças','f2.d':'Pilha open source: sem custos por usuário, mês ou token. Um investimento único em hardware; o custo não cresce com o uso.',
+  'f3.t':'Agentes que trabalham','f3.d':'Não é um chat: assistentes que encontram, leem e editam arquivos citando as fontes. A saída sempre passa por revisão humana.',
+  'f4.t':'Controle com a gestão','f4.d':'Chaves e orçamentos por equipe; quem, qual modelo, quanto — em um painel. Revogue a chave de quem sai com um comando.',
+  'proc.tag':'Protocolo de instalação','proc.title':'Processo chave na mão',
+  'proc1.t':'Avaliação','proc1.d':'Análise de equipe, hardware, rede e processos; dimensionamento e proposta.','proc1.dur':'1 DIA',
+  'proc2.t':'Instalação','proc2.d':'Servidor, modelos, estrutura de chaves/orçamentos e testes de ponta a ponta.','proc2.dur':'1–2 DIAS',
+  'proc3.t':'Treinamento','proc3.d':'Treinamento prático por função — com seu trabalho real, sem slides.','proc3.dur':'0,5–2 DIAS',
+  'proc4.t':'Suporte e entrega','proc4.d':'30 dias de suporte remoto, transferência operacional e documentação.','proc4.dur':'30 DIAS',
+  'hon.tag':'Papo reto','hon.title':'Nós dizemos os limites',
+  'hon.1':'<strong>Modelos locais não são Claude nem GPT.</strong> Eles dão conta da maior parte do trabalho rotineiro; para as tarefas mais difíceis há uma opção híbrida controlada em que você decide o que sai.',
+  'hon.2':'<strong>A qualidade escala com o hardware.</strong> Dimensionamos pelo uso concorrente real, não para vender — começar pequeno e crescer é seguro.',
+  'hon.3':'<strong>A IA rascunha, sua equipe assina.</strong> A saída passa por revisão e aprovação humana; construímos isso dentro do seu processo, não no lugar dele.',
+  'st.tag':'Resumo técnico','st.title':'O que a TI pergunta primeiro',
+  'st1.l':'Servidor','st1.n':'classe 8–24GB VRAM; caminho de crescimento pronto','st2.l':'Software','st2.n':'pilha open source, versões fixadas',
+  'st3.v':'2 PORTAS','st3.l':'Rede','st3.n':'apenas interna; Internet só na instalação',
+  'st4.v':'0 NUVEM','st4.l':'Dependências','st4.n':'sem contas, sem assinaturas, sem saída de dados',
+  'st5.l':'Lado do usuário','st5.n':'uma CLI para devs; navegador para os demais',
+  'st6.v':'R$0 LICENÇA','st6.l':'Por usuário','st6.n':'hardware uma vez, consultoria por escopo',
+  'cta.title':'Vamos abrir a porta?','cta.sub':'Uma demo ao vivo de 30 minutos — em modo avião, na nossa própria máquina. Depois: avaliação de 1 dia e proposta sob medida.',
+  'cta.b1':'Pedir uma demo','cta.b2':'Fazer uma pergunta','footer.tag':'Sua porta de entrada para a IA'
+},
+nl: {
+  'meta.title':'GALA | Uw poort naar AI','meta.desc':'AI-infrastructuur op eigen servers: uw code en data verlaten het bedrijf nooit, zonder licentiekosten per gebruiker. Gala · GalaChat · GalaFlow.',
+  'nav.products':'Producten','nav.why':'Waarom','nav.process':'Proces','nav.honest':'Klare taal','nav.cta':'Demo aanvragen',
+  'hero.tag':'On-prem AI // Privacy voorop','hero.t1':'AI komt binnen','hero.t2':'Data blijft binnen',
+  'hero.desc':'Een codeeragent voor ontwikkelaars, chat met uw bedrijfsdocumenten, automatiseringsflows en budgetbeheer per team — alles op uw eigen server. Geen kosten per gebruiker. Zelfs internet is niet nodig: deze opname is gemaakt in vliegtuigmodus.',
+  'hero.cta1':'Demo aanvragen','hero.cta2':'Bekijk producten','term.title':'DEMO // VLIEGTUIGMODUS','term.badge':'✈ OFFLINE',
+  'term.fail':'Fout: netwerk onbereikbaar.','term.bug':'Total: 010.505        # de bug: plakt samen i.p.v. optellen',
+  'term.cmd':'$ opencode "los de bug in het total-commando op"','term.read':'→ index.js gelezen','term.edit':'← index.js bewerkt (parseFloat toegevoegd)','term.ok':'✔ pakketten naar internet verzonden: 0',
+  'prod.tag':'Productfamilie','prod.title':'Drie wegen door de poort','prod.sub':'Eén kernplatform — gateway, lokale modellen, budgetbeheer — in drie pakketten.',
+  'p1.for':'// Softwarebedrijven','p1.desc':'<strong>Een AI-codeeragent.</strong> Ontwikkelaars werken met een assistent die bestanden leest en bewerkt vanuit de terminal; analisten, testers en PO\'s gebruiken hetzelfde platform in de browser.',
+  'p2.for':'// Bedrijven zonder softwareontwikkeling','p2.desc':'<strong>Een assistent die uw documenten kent.</strong> Upload reglementen en contracten; medewerkers krijgen antwoorden gebaseerd op uw documenten, met bronvermelding. Staat het er niet in, dan zegt hij dat.',
+  'p3.for':'// Automatiseringsbehoeften','p3.desc':'<strong>Agents die uw workflows automatiseren.</strong> E-mailsamenvattingen en conceptantwoorden, data-extractie uit documenten, geplande rapporten — onder hetzelfde budgetbeheer.',
+  'status.avail':'● BESCHIKBAAR',
+  'feat.tag':'Waarom Gala','feat.title':'Geen lekken · Geen rekeningen','feat.sub':'Teams plakken vandaag code in de cloud en gokken met vertrouwelijkheid, of mijden AI en raken achterop. Geen van beide is acceptabel.',
+  'f1.t':'Data blijft binnen','f1.d':'De modellen draaien op uw eigen server. Prompts, code en documenten bereiken nooit een externe dienst; werkt zelfs op afgesloten netwerken.',
+  'f2.t':'Geen licentiekosten','f2.d':'Open-source stack: geen kosten per gebruiker, maand of token. Eén hardware-investering; kosten blijven vlak.',
+  'f3.t':'Agents die werken','f3.d':'Geen chatvenster: assistenten die bestanden vinden, lezen en bewerken en hun bronnen citeren. Output gaat altijd langs menselijke controle.',
+  'f4.t':'Beheer houdt controle','f4.d':'Sleutels en budgetten per team; wie, welk model, hoeveel — op één dashboard. Trek de sleutel van een vertrekker in met één commando.',
+  'proc.tag':'Installatieprotocol','proc.title':'Turnkey proces',
+  'proc1.t':'Analyse','proc1.d':'Analyse van team, hardware, netwerk en processen; dimensionering en voorstel.','proc1.dur':'1 DAG',
+  'proc2.t':'Installatie','proc2.d':'Server, modellen, sleutel-/budgetstructuur en end-to-end verificatie.','proc2.dur':'1–2 DAGEN',
+  'proc3.t':'Training','proc3.d':'Praktische training per rol — met uw echte werk, zonder slides.','proc3.dur':'0,5–2 DAGEN',
+  'proc4.t':'Support & overdracht','proc4.d':'30 dagen support op afstand, operationele overdracht en documentatie.','proc4.dur':'30 DAGEN',
+  'hon.tag':'Klare taal','hon.title':'Wij benoemen de grenzen',
+  'hon.1':'<strong>Lokale modellen zijn geen Claude of GPT.</strong> Ze dragen het meeste routinewerk betrouwbaar; voor het zwaarste werk is er een gecontroleerde hybride optie waarbij u bepaalt wat naar buiten gaat.',
+  'hon.2':'<strong>Kwaliteit schaalt met hardware.</strong> Wij dimensioneren op echt gelijktijdig gebruik, niet voor de verkoop — klein beginnen en groeien is veilig.',
+  'hon.3':'<strong>AI maakt het concept, uw team tekent.</strong> Output gaat door review en menselijke goedkeuring; dat bouwen we in uw proces in, niet erlangs.',
+  'st.tag':'Technisch overzicht','st.title':'Wat IT eerst vraagt',
+  'st1.l':'Server','st1.n':'8–24GB VRAM-klasse; groeipad aanwezig','st2.l':'Software','st2.n':'open-source stack, vastgezette versies',
+  'st3.v':'2 POORTEN','st3.l':'Netwerk','st3.n':'alleen intern; internet alleen tijdens installatie',
+  'st4.v':'0 CLOUD','st4.l':'Afhankelijkheden','st4.n':'geen accounts, geen abonnementen, geen data naar buiten',
+  'st5.l':'Gebruikerskant','st5.n':'één CLI voor ontwikkelaars; browser voor de rest',
+  'st6.v':'€0 LICENTIE','st6.l':'Per gebruiker','st6.n':'hardware eenmalig, consultancy op maat',
+  'cta.title':'Zullen we de poort openen?','cta.sub':'Een live demo van 30 minuten — in vliegtuigmodus, op onze eigen machine. Daarna: 1 dag analyse en een voorstel op maat.',
+  'cta.b1':'Demo aanvragen','cta.b2':'Stel een vraag','footer.tag':'Uw poort naar AI'
+},
+pl: {
+  'meta.title':'GALA | Twoja brama do AI','meta.desc':'Infrastruktura AI we własnej serwerowni: kod i dane nigdy nie wychodzą, bez opłat licencyjnych za użytkownika. Gala · GalaChat · GalaFlow.',
+  'nav.products':'Produkty','nav.why':'Dlaczego','nav.process':'Proces','nav.honest':'Szczerze','nav.cta':'Zamów demo',
+  'hero.tag':'AI on-prem // Prywatność przede wszystkim','hero.t1':'AI wchodzi','hero.t2':'Dane zostają',
+  'hero.desc':'Agent programistyczny dla deweloperów, czat z dokumentami firmowymi, przepływy automatyzacji i kontrola budżetu na zespół — wszystko na Waszym serwerze. Bez opłat za użytkownika. Internet nie jest nawet potrzebny: to nagranie powstało w trybie samolotowym.',
+  'hero.cta1':'Zamów demo','hero.cta2':'Zobacz produkty','term.title':'DEMO // TRYB SAMOLOTOWY','term.badge':'✈ OFFLINE',
+  'term.fail':'Błąd: sieć nieosiągalna.','term.bug':'Total: 010.505        # błąd: sklejanie zamiast sumowania',
+  'term.cmd':'$ opencode "napraw błąd w komendzie total"','term.read':'→ czytanie index.js','term.edit':'← index.js zmieniony (dodano parseFloat)','term.ok':'✔ pakiety wysłane do internetu: 0',
+  'prod.tag':'Rodzina produktów','prod.title':'Trzy drogi przez bramę','prod.sub':'Jedna platforma — gateway, lokalne modele, kontrola budżetu — w trzech pakietach.',
+  'p1.for':'// Firmy software\'owe','p1.desc':'<strong>Agent programistyczny AI.</strong> Deweloperzy pracują z asystentem, który czyta i edytuje pliki z terminala; analitycy, testerzy i PO korzystają z tej samej platformy w przeglądarce.',
+  'p2.for':'// Firmy nietworzące oprogramowania','p2.desc':'<strong>Asystent, który zna Wasze dokumenty.</strong> Wgrajcie regulaminy i umowy; pracownicy dostają odpowiedzi oparte na dokumentach, z cytatami. Jeśli czegoś nie ma w dokumencie — powie to.',
+  'p3.for':'// Potrzeby automatyzacji','p3.desc':'<strong>Agenci automatyzujący procesy.</strong> Streszczenia e-maili i szkice odpowiedzi, ekstrakcja danych z dokumentów, raporty cykliczne — pod tą samą kontrolą budżetu.',
+  'status.avail':'● DOSTĘPNE',
+  'feat.tag':'Dlaczego Gala','feat.title':'Zero wycieków · Zero rachunków','feat.sub':'Zespoły dziś albo wklejają kod do chmury, ryzykując poufność, albo unikają AI i zostają w tyle. Żadna z opcji nie jest do przyjęcia.',
+  'f1.t':'Dane zostają w firmie','f1.d':'Modele działają na Waszym serwerze. Prompty, kod i dokumenty nigdy nie trafiają do zewnętrznej usługi; działa nawet w sieciach odciętych.',
+  'f2.t':'Bez opłat licencyjnych','f2.d':'Stos open source: bez opłat za użytkownika, miesiąc czy token. Jedna inwestycja w sprzęt; koszt nie rośnie z użyciem.',
+  'f3.t':'Agenci, którzy pracują','f3.d':'To nie czat: asystenci, którzy znajdują, czytają i edytują pliki, cytując źródła. Wynik zawsze przechodzi ludzką weryfikację.',
+  'f4.t':'Kontrola po stronie zarządu','f4.d':'Klucze i budżety na zespół; kto, jaki model, ile — na jednym panelu. Klucz odchodzącego pracownika unieważnisz jedną komendą.',
+  'proc.tag':'Protokół wdrożenia','proc.title':'Proces pod klucz',
+  'proc1.t':'Analiza','proc1.d':'Analiza zespołu, sprzętu, sieci i procesów; dobór mocy i oferta.','proc1.dur':'1 DZIEŃ',
+  'proc2.t':'Wdrożenie','proc2.d':'Serwer, modele, struktura kluczy/budżetów i testy end-to-end.','proc2.dur':'1–2 DNI',
+  'proc3.t':'Szkolenie','proc3.d':'Praktyczne szkolenia wg ról — na Waszej prawdziwej pracy, bez slajdów.','proc3.dur':'0,5–2 DNI',
+  'proc4.t':'Wsparcie i przekazanie','proc4.d':'30 dni zdalnego wsparcia, przekazanie operacyjne i dokumentacja.','proc4.dur':'30 DNI',
+  'hon.tag':'Szczerze','hon.title':'Sami nazwiemy ograniczenia',
+  'hon.1':'<strong>Lokalne modele to nie Claude ani GPT.</strong> Niezawodnie udźwigną większość rutynowej pracy; do najtrudniejszych zadań jest kontrolowana opcja hybrydowa, w której to Wy decydujecie, co wychodzi.',
+  'hon.2':'<strong>Jakość skaluje się ze sprzętem.</strong> Dobieramy moc pod realne równoległe użycie, nie pod sprzedaż — zacząć małym i rosnąć jest bezpiecznie.',
+  'hon.3':'<strong>AI pisze szkic, Wasz zespół podpisuje.</strong> Wyniki przechodzą przegląd i ludzką akceptację; wbudowujemy to w Wasz proces, nie zamiast niego.',
+  'st.tag':'Podsumowanie techniczne','st.title':'O co najpierw zapyta IT',
+  'st1.l':'Serwer','st1.n':'klasa 8–24GB VRAM; ścieżka wzrostu gotowa','st2.l':'Oprogramowanie','st2.n':'stos open source, przypięte wersje',
+  'st3.v':'2 PORTY','st3.l':'Sieć','st3.n':'tylko wewnętrzna; internet tylko przy instalacji',
+  'st4.v':'0 CHMURY','st4.l':'Zależności','st4.n':'bez kont, bez subskrypcji, bez wypływu danych',
+  'st5.l':'Strona użytkownika','st5.n':'jedno CLI dla deweloperów; przeglądarka dla reszty',
+  'st6.v':'0 ZŁ LICENCJI','st6.l':'Za użytkownika','st6.n':'sprzęt raz, konsulting wg zakresu',
+  'cta.title':'Otwieramy bramę?','cta.sub':'30-minutowe demo na żywo — w trybie samolotowym, na naszej maszynie. Potem: 1-dniowa analiza i oferta skrojona pod Was.',
+  'cta.b1':'Zamów demo','cta.b2':'Zadaj pytanie','footer.tag':'Twoja brama do AI'
+},
+ru: {
+  'meta.title':'GALA | Ваши ворота в мир ИИ','meta.desc':'ИИ-инфраструктура на ваших серверах: код и данные никогда не покидают компанию, без лицензий за пользователя. Gala · GalaChat · GalaFlow.',
+  'nav.products':'Продукты','nav.why':'Почему','nav.process':'Процесс','nav.honest':'Начистоту','nav.cta':'Заказать демо',
+  'hero.tag':'ИИ on-prem // Приватность прежде всего','hero.t1':'ИИ входит','hero.t2':'Данные остаются',
+  'hero.desc':'Агент для программистов, чат с документами компании, потоки автоматизации и контроль бюджета по командам — всё на вашем собственном сервере. Без платы за пользователя. Не нужен даже интернет: эта запись сделана в авиарежиме.',
+  'hero.cta1':'Заказать демо','hero.cta2':'Смотреть продукты','term.title':'ДЕМО // АВИАРЕЖИМ','term.badge':'✈ ОФЛАЙН',
+  'term.fail':'Ошибка: сеть недоступна.','term.bug':'Total: 010.505        # баг: склейка вместо суммы',
+  'term.cmd':'$ opencode "исправь баг в команде total"','term.read':'→ читаю index.js','term.edit':'← index.js изменён (добавлен parseFloat)','term.ok':'✔ пакетов отправлено в интернет: 0',
+  'prod.tag':'Семейство продуктов','prod.title':'Три пути через ворота','prod.sub':'Одна платформа — шлюз, локальные модели, контроль бюджета — в трёх пакетах.',
+  'p1.for':'// Софтверные компании','p1.desc':'<strong>ИИ-агент для кода.</strong> Разработчики работают с ассистентом, который читает и правит файлы из терминала; аналитики, тестировщики и PO пользуются той же платформой из браузера.',
+  'p2.for':'// Компании без разработки ПО','p2.desc':'<strong>Ассистент, знающий ваши документы.</strong> Загрузите регламенты и договоры; сотрудники получают ответы по документам, со ссылками на источник. Если в документе этого нет — он так и скажет.',
+  'p3.for':'// Задачи автоматизации','p3.desc':'<strong>Агенты, автоматизирующие процессы.</strong> Сводки писем и черновики ответов, извлечение данных из документов, регулярные отчёты — под тем же контролем бюджета.',
+  'status.avail':'● ДОСТУПНО',
+  'feat.tag':'Почему Gala','feat.title':'Ни утечек · Ни счетов','feat.sub':'Сегодня команды либо вставляют код в облако, рискуя конфиденциальностью, либо избегают ИИ и отстают. Ни то, ни другое не приемлемо.',
+  'f1.t':'Данные внутри','f1.d':'Модели работают на вашем сервере. Промпты, код и документы никогда не попадают во внешний сервис; работает даже в изолированных сетях.',
+  'f2.t':'Без лицензий','f2.d':'Open-source-стек: без платы за пользователя, месяц или токен. Одно вложение в железо; расходы не растут с использованием.',
+  'f3.t':'Агенты, которые работают','f3.d':'Не чат-окно: ассистенты находят, читают и правят файлы, указывая источники. Результат всегда проходит проверку человеком.',
+  'f4.t':'Контроль у руководства','f4.d':'Ключи и бюджеты по командам; кто, какая модель, сколько — на одной панели. Ключ уволившегося отзывается одной командой.',
+  'proc.tag':'Протокол внедрения','proc.title':'Процесс под ключ',
+  'proc1.t':'Оценка','proc1.d':'Анализ команды, железа, сети и процессов; расчёт мощности и предложение.','proc1.dur':'1 ДЕНЬ',
+  'proc2.t':'Установка','proc2.d':'Сервер, модели, структура ключей/бюджетов и сквозные проверки.','proc2.dur':'1–2 ДНЯ',
+  'proc3.t':'Обучение','proc3.d':'Практическое обучение по ролям — на вашей реальной работе, без слайдов.','proc3.dur':'0,5–2 ДНЯ',
+  'proc4.t':'Поддержка и передача','proc4.d':'30 дней удалённой поддержки, передача эксплуатации и документация.','proc4.dur':'30 ДНЕЙ',
+  'hon.tag':'Начистоту','hon.title':'Мы сами назовём ограничения',
+  'hon.1':'<strong>Локальные модели — это не Claude и не GPT.</strong> Они надёжно закрывают большую часть рутины; для самых сложных задач есть контролируемый гибрид, где вы решаете, что уходит наружу.',
+  'hon.2':'<strong>Качество растёт с железом.</strong> Мы рассчитываем мощность под реальную параллельную нагрузку, а не ради продажи — начать с малого и расти безопасно.',
+  'hon.3':'<strong>ИИ делает черновик, подписывает ваша команда.</strong> Результаты проходят ревью и одобрение человеком; мы встраиваем это в ваш процесс, а не вместо него.',
+  'st.tag':'Техническая сводка','st.title':'Первые вопросы ИТ',
+  'st1.l':'Сервер','st1.n':'класс 8–24 ГБ VRAM; путь роста готов','st2.l':'ПО','st2.n':'open-source-стек, версии зафиксированы',
+  'st3.v':'2 ПОРТА','st3.l':'Сеть','st3.n':'только внутренняя; интернет — лишь на установке',
+  'st4.v':'0 ОБЛАКОВ','st4.l':'Зависимости','st4.n':'без аккаунтов, подписок и утечки данных',
+  'st5.l':'Сторона пользователя','st5.n':'одна CLI для разработчиков; браузер для остальных',
+  'st6.v':'0₽ ЛИЦЕНЗИЙ','st6.l':'За пользователя','st6.n':'железо один раз, консалтинг по объёму',
+  'cta.title':'Откроем ворота?','cta.sub':'30-минутное живое демо — в авиарежиме, на нашей машине. Затем: оценка за 1 день и предложение под вас.',
+  'cta.b1':'Заказать демо','cta.b2':'Задать вопрос','footer.tag':'Ваши ворота в мир ИИ'
+},
+ar: {
+  'meta.title':'GALA | بوابتك إلى الذكاء الاصطناعي','meta.desc':'بنية ذكاء اصطناعي داخل شركتك: الشيفرة والبيانات لا تغادر أبدًا، وبدون رسوم ترخيص لكل مستخدم. Gala · GalaChat · GalaFlow.',
+  'nav.products':'المنتجات','nav.why':'لماذا','nav.process':'المراحل','nav.honest':'بصراحة','nav.cta':'اطلب عرضًا',
+  'hero.tag':'ذكاء اصطناعي داخلي // الخصوصية أولًا','hero.t1':'الذكاء يدخل','hero.t2':'بياناتك تبقى',
+  'hero.desc':'وكيل برمجة للمطوّرين، محادثة مع مستندات شركتك، تدفقات أتمتة وتحكم بالميزانية لكل فريق — كل ذلك على خادمك الخاص. بلا رسوم لكل مستخدم. حتى الإنترنت ليس شرطًا: هذا التسجيل التُقط في وضع الطيران.',
+  'hero.cta1':'اطلب عرضًا','hero.cta2':'شاهد المنتجات','term.title':'عرض // وضع الطيران','term.badge':'✈ دون اتصال',
+  'term.fail':'خطأ: الشبكة غير متاحة.','term.bug':'Total: 010.505        # الخلل: دمج نصوص بدل الجمع',
+  'term.cmd':'$ opencode "أصلح خلل أمر total"','term.read':'→ قراءة index.js','term.edit':'← تم تعديل index.js (أُضيف parseFloat)','term.ok':'✔ حزم أُرسلت إلى الإنترنت: 0',
+  'prod.tag':'عائلة المنتجات','prod.title':'ثلاثة مسارات عبر البوابة','prod.sub':'منصة واحدة — بوابة، نماذج محلية، تحكم بالميزانية — في ثلاث باقات.',
+  'p1.for':'// شركات البرمجيات','p1.desc':'<strong>وكيل برمجة بالذكاء الاصطناعي.</strong> يعمل المطوّرون مع مساعد يقرأ الملفات ويعدّلها من الطرفية؛ ويستخدم المحلّلون والمختبرون ومديرو المنتج المنصةَ نفسها من المتصفح.',
+  'p2.for':'// شركات لا تطوّر برمجيات','p2.desc':'<strong>مساعد يعرف مستنداتك.</strong> ارفع اللوائح والعقود؛ يحصل الموظفون على إجابات مستندة إلى وثائقك مع الاستشهاد بالمصدر. وإن لم يكن الجواب في المستند، يقول ذلك.',
+  'p3.for':'// احتياجات الأتمتة','p3.desc':'<strong>وكلاء يؤتمتون سير عملك.</strong> تلخيص البريد ومسودات الرد، استخراج البيانات من المستندات، تقارير مجدولة — تحت التحكم نفسه بالميزانية.',
+  'status.avail':'● متوفر الآن',
+  'feat.tag':'لماذا Gala','feat.title':'لا تسريب · لا فواتير','feat.sub':'اليوم إمّا تلصق الفرق شيفرتها في السحابة مخاطرةً بالسرية، أو تتجنب الذكاء الاصطناعي فتتأخر. كلا الخيارين غير مقبول.',
+  'f1.t':'البيانات تبقى داخليًا','f1.d':'تعمل النماذج على خادمك الخاص. لا تصل الأوامر ولا الشيفرة ولا المستندات إلى أي خدمة خارجية؛ ويعمل حتى في الشبكات المعزولة.',
+  'f2.t':'بلا رسوم ترخيص','f2.d':'حزمة مفتوحة المصدر: لا رسوم لكل مستخدم أو شهر أو رمز. استثمار واحد في العتاد؛ وتبقى التكلفة ثابتة مهما زاد الاستخدام.',
+  'f3.t':'وكلاء ينجزون العمل','f3.d':'ليست نافذة دردشة: مساعدون يجدون الملفات ويقرؤونها ويعدّلونها ويستشهدون بالمصادر. والمخرجات تمر دائمًا بمراجعة بشرية.',
+  'f4.t':'التحكم بيد الإدارة','f4.d':'مفاتيح وميزانيات لكل فريق؛ مَن، وأي نموذج، وكم — في لوحة واحدة. ومفتاح المغادر يُلغى بأمر واحد.',
+  'proc.tag':'بروتوكول التركيب','proc.title':'تسليم مفتاح باليد',
+  'proc1.t':'التقييم','proc1.d':'تحليل الفريق والعتاد والشبكة والعمليات؛ توصية بالحجم وعرض سعر.','proc1.dur':'يوم واحد',
+  'proc2.t':'التركيب','proc2.d':'الخادم والنماذج وبنية المفاتيح/الميزانيات واختبارات شاملة.','proc2.dur':'1–2 يوم',
+  'proc3.t':'التدريب','proc3.d':'تدريب عملي حسب الدور — على عملك الحقيقي، بلا شرائح.','proc3.dur':'0.5–2 يوم',
+  'proc4.t':'الدعم والتسليم','proc4.d':'30 يومًا من الدعم عن بُعد، وتسليم التشغيل والتوثيق.','proc4.dur':'30 يومًا',
+  'hon.tag':'بصراحة','hon.title':'نحن من يسمّي الحدود',
+  'hon.1':'<strong>النماذج المحلية ليست Claude ولا GPT.</strong> إنها تنجز معظم العمل الروتيني بموثوقية؛ وللمهام الأصعب خيار هجين مضبوط تقرّر أنت فيه ما يخرج.',
+  'hon.2':'<strong>الجودة تتدرّج مع العتاد.</strong> نحدد الحجم وفق الاستخدام المتزامن الفعلي لا لأجل البيع — البدء صغيرًا ثم النمو آمن.',
+  'hon.3':'<strong>الذكاء يكتب المسودة وفريقك يوقّع.</strong> تمر المخرجات بمراجعة وموافقة بشرية؛ نبني ذلك داخل عملياتك لا بديلاً عنها.',
+  'st.tag':'ملخص تقني','st.title':'أول ما يسأل عنه قسم تقنية المعلومات',
+  'st1.l':'الخادم','st1.n':'فئة 8–24GB VRAM؛ مسار نموّ جاهز','st2.l':'البرمجيات','st2.n':'حزمة مفتوحة المصدر بإصدارات مثبّتة',
+  'st3.v':'منفذان','st3.l':'الشبكة','st3.n':'داخلية فقط؛ الإنترنت عند التركيب فحسب',
+  'st4.v':'0 سحابة','st4.l':'الاعتماديات','st4.n':'لا حسابات ولا اشتراكات ولا خروج للبيانات',
+  'st5.l':'جهة المستخدم','st5.n':'أداة سطر أوامر للمطوّرين؛ متصفح للبقية',
+  'st6.v':'0 رسوم','st6.l':'لكل مستخدم','st6.n':'العتاد مرة واحدة، والاستشارة حسب النطاق',
+  'cta.title':'هل نفتح البوابة؟','cta.sub':'عرض حي لمدة 30 دقيقة — في وضع الطيران وعلى جهازنا نحن. بعده: تقييم يوم واحد وعرض مفصّل على مقاسك.',
+  'cta.b1':'اطلب عرضًا','cta.b2':'اطرح سؤالًا','footer.tag':'بوابتك إلى الذكاء الاصطناعي'
+},
+ja: {
+  'meta.title':'GALA | AIへの扉','meta.desc':'オンプレミスAI基盤：コードもデータも社外に出ず、ユーザーごとのライセンス費用も不要。Gala · GalaChat · GalaFlow。',
+  'nav.products':'製品','nav.why':'選ぶ理由','nav.process':'導入の流れ','nav.honest':'正直な話','nav.cta':'デモを予約',
+  'hero.tag':'オンプレミスAI // プライバシー第一','hero.t1':'AIは社内に','hero.t2':'データも社内に',
+  'hero.desc':'開発者向けのコーディングエージェント、社内文書と対話できるチャット、自動化フロー、チーム別の予算管理 — すべて自社サーバーで動きます。ユーザーごとの費用はゼロ。インターネットすら不要：この録画は機内モードで撮影しました。',
+  'hero.cta1':'デモを予約','hero.cta2':'製品を見る','term.title':'デモ // 機内モード','term.badge':'✈ オフライン',
+  'term.fail':'エラー：ネットワークに到達できません。','term.bug':'Total: 010.505        # バグ：加算ではなく文字列連結',
+  'term.cmd':'$ opencode "totalコマンドのバグを修正して"','term.read':'→ index.js を読み込み','term.edit':'← index.js を修正（parseFloat を追加）','term.ok':'✔ インターネットへ送信したパケット：0',
+  'prod.tag':'製品ファミリー','prod.title':'扉の先にある3つの道','prod.sub':'同じ基盤 — ゲートウェイ、ローカルモデル、予算管理 — を3つのパッケージで。',
+  'p1.for':'// ソフトウェア企業向け','p1.desc':'<strong>AIコーディングエージェント。</strong>開発者はターミナルからファイルを読み書きするアシスタントと働き、アナリスト・テスター・POはブラウザから同じ基盤を使います。',
+  'p2.for':'// 開発部門を持たない企業向け','p2.desc':'<strong>社内文書を知るアシスタント。</strong>規程や契約書をアップロードすれば、文書に基づく出典付きの回答が得られます。文書にないことは「ない」と答えます。',
+  'p3.for':'// 自動化ニーズ向け','p3.desc':'<strong>業務を自動化するエージェント。</strong>メール要約と返信下書き、文書からのデータ抽出、定期レポート — 同じ予算管理のもとで。',
+  'status.avail':'● 提供中',
+  'feat.tag':'Galaを選ぶ理由','feat.title':'漏えいゼロ · 請求ゼロ','feat.sub':'いまチームは、コードをクラウドに貼り付けて機密性を賭けるか、AIを避けて遅れを取るかの二択です。どちらも受け入れられません。',
+  'f1.t':'データは社内に','f1.d':'モデルは自社サーバーで動作。プロンプトもコードも文書も外部サービスには一切届きません。閉域網でも動きます。',
+  'f2.t':'ライセンス費用ゼロ','f2.d':'オープンソーススタック：ユーザー・月・トークン単位の費用なし。ハードウェアへの一度の投資で、使うほど安くなります。',
+  'f3.t':'働くエージェント','f3.d':'ただのチャットではなく、ファイルを見つけて読み、修正し、出典を示すアシスタント。出力は必ず人のレビューを通ります。',
+  'f4.t':'管理は経営の手に','f4.d':'チーム別のキーと予算。誰が・どのモデルを・どれだけ — ひとつのダッシュボードで。退職者のキーはコマンド一つで失効。',
+  'proc.tag':'導入プロトコル','proc.title':'ターンキー導入',
+  'proc1.t':'アセスメント','proc1.d':'チーム・ハードウェア・ネットワーク・業務の分析、サイジング提案と見積もり。','proc1.dur':'1日',
+  'proc2.t':'構築','proc2.d':'サーバー、モデル、キー/予算構成、エンドツーエンドの検証テスト。','proc2.dur':'1–2日',
+  'proc3.t':'トレーニング','proc3.d':'役割別のハンズオン研修 — スライドではなく実際の業務で。','proc3.dur':'0.5–2日',
+  'proc4.t':'サポートと引き継ぎ','proc4.d':'30日間のリモートサポート、運用引き継ぎ、ドキュメント一式。','proc4.dur':'30日',
+  'hon.tag':'正直な話','hon.title':'限界はこちらから申し上げます',
+  'hon.1':'<strong>ローカルモデルはClaudeやGPTではありません。</strong>日常業務の大半は確実にこなします。最難関のタスクには、何を外に出すかをお客様が決める管理されたハイブリッド構成があります。',
+  'hon.2':'<strong>品質はハードウェアに比例します。</strong>販売のためではなく、実際の同時利用に合わせてサイジングします — 小さく始めて育てるのが安全です。',
+  'hon.3':'<strong>AIは下書き、署名はチームが。</strong>出力はレビューと人の承認を経ます。それを業務プロセスの中に組み込みます。',
+  'st.tag':'技術サマリー','st.title':'情シスが最初に聞くこと',
+  'st1.l':'サーバー','st1.n':'VRAM 8–24GBクラス、拡張パスあり','st2.l':'ソフトウェア','st2.n':'オープンソーススタック、バージョン固定',
+  'st3.v':'2ポート','st3.l':'ネットワーク','st3.n':'社内のみ。インターネットは導入時だけ',
+  'st4.v':'クラウド0','st4.l':'依存関係','st4.n':'アカウント・サブスク・データ流出なし',
+  'st5.l':'ユーザー側','st5.n':'開発者はCLIひとつ、他はブラウザのみ',
+  'st6.v':'￥0ライセンス','st6.l':'ユーザーあたり','st6.n':'ハードは一度、コンサルは範囲に応じて',
+  'cta.title':'扉を開けますか？','cta.sub':'30分のライブデモ — 機内モードで、私たちのマシンで。その後：1日のアセスメントと、貴社に合わせた提案。',
+  'cta.b1':'デモを予約','cta.b2':'質問する','footer.tag':'AIへの扉'
+}
+};
 
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
-            anchor.addEventListener('click', function (e) {
-                var target = document.querySelector(this.getAttribute('href'));
-                if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-            });
-        });
-    </script>
+// --- language resolution: ?lang > localStorage > browser > en ---
+function resolveLang() {
+    const q = new URLSearchParams(location.search).get('lang');
+    if (q && I18N[q]) return q;
+    const saved = localStorage.getItem('gala-lang');
+    if (saved && I18N[saved]) return saved;
+    for (const cand of (navigator.languages || [navigator.language || 'en'])) {
+        const base = String(cand).toLowerCase().split('-')[0];
+        if (I18N[base]) return base;
+    }
+    return 'en';
+}
+
+function applyLang(lang) {
+    const d = I18N[lang];
+    document.documentElement.lang = lang;
+    document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+    document.title = d['meta.title'];
+    document.getElementById('metadesc').setAttribute('content', d['meta.desc']);
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const k = el.getAttribute('data-i18n');
+        if (d[k] !== undefined) el.textContent = d[k];
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+        const k = el.getAttribute('data-i18n-html');
+        if (d[k] !== undefined) el.innerHTML = d[k];
+    });
+    localStorage.setItem('gala-lang', lang);
+    startTerminal(d);
+}
+
+// language switcher
+const sel = document.getElementById('langsel');
+for (const [code, name] of Object.entries(LANGS)) {
+    const o = document.createElement('option');
+    o.value = code; o.textContent = name;
+    sel.appendChild(o);
+}
+const initial = resolveLang();
+sel.value = initial;
+sel.addEventListener('change', () => applyLang(sel.value));
+
+// Navbar scroll effect
+var navbar = document.getElementById('navbar');
+window.addEventListener('scroll', function () {
+    if (window.scrollY > 50) { navbar.classList.add('scrolled'); }
+    else { navbar.classList.remove('scrolled'); }
+});
+
+// Terminal demo animation (restartable, localized output lines)
+let termTimers = [];
+function startTerminal(d) {
+    termTimers.forEach(t => clearTimeout(t) || clearInterval(t));
+    termTimers = [];
+    const lines = [
+        { t: "$ ping 8.8.8.8", c: "" },
+        { t: d['term.fail'], c: "t-red" },
+        { t: "", c: "" },
+        { t: "$ node index.js total", c: "" },
+        { t: d['term.bug'], c: "t-dim" },
+        { t: "", c: "" },
+        { t: d['term.cmd'], c: "" },
+        { t: d['term.read'], c: "t-dim" },
+        { t: d['term.edit'], c: "t-cyan" },
+        { t: "", c: "" },
+        { t: "$ node index.js total", c: "" },
+        { t: "Total: 15.5", c: "t-green" },
+        { t: "", c: "" },
+        { t: d['term.ok'], c: "t-green" }
+    ];
+    const el = document.getElementById('termbody');
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
+    function render(upto, partial) {
+        let html = "";
+        for (let i = 0; i < upto; i++) {
+            const l = lines[i];
+            html += l.c ? '<span class="' + l.c + '">' + esc(l.t) + "</span>\n" : esc(l.t) + "\n";
+        }
+        if (partial !== undefined) {
+            const p = lines[upto];
+            const frag = p.t.slice(0, partial);
+            html += p.c ? '<span class="' + p.c + '">' + esc(frag) + "</span>" : esc(frag);
+        }
+        el.innerHTML = html + '<span class="cursor"></span>';
+    }
+    if (reduce) { render(lines.length); return; }
+    let li = 0;
+    function nextLine() {
+        if (li >= lines.length) { render(lines.length); return; }
+        const isCmd = lines[li].t.charAt(0) === "$";
+        if (isCmd) {
+            let ch = 0;
+            const iv = setInterval(function () {
+                ch++;
+                render(li, ch);
+                if (ch >= lines[li].t.length) {
+                    clearInterval(iv); li++;
+                    termTimers.push(setTimeout(nextLine, 420));
+                }
+            }, 26);
+            termTimers.push(iv);
+        } else {
+            li++;
+            render(li);
+            termTimers.push(setTimeout(nextLine, lines[li - 1] && lines[li - 1].t === "" ? 140 : 340));
+        }
+    }
+    termTimers.push(setTimeout(nextLine, 600));
+}
+
+applyLang(initial);
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+    anchor.addEventListener('click', function (e) {
+        var target = document.querySelector(this.getAttribute('href'));
+        if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+});
+</script>
 </body>
 </html>
