@@ -1,378 +1,786 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Gala — Yapay Zekaya Açılan Kapınız</title>
-<meta name="description" content="Şirket içi yapay zekâ altyapısı: kodunuz dışarı çıkmadan, kullanıcı başına lisans ücreti olmadan. OpenCode + yerel modeller + kullanım/bütçe yönetimi.">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GALA | Yapay Zekaya Açılan Kapınız</title>
+<meta name="description" content="Şirket içi yapay zekâ altyapısı: kod ve verileriniz dışarı çıkmadan, kullanıcı başına lisans ücreti olmadan. Gala · GalaChat · GalaFlow.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
-:root{
-  --ink:#122226; --paper:#F2F5F4; --card:#FFFFFF;
-  --text:#1B2E32; --muted:#54696D; --line:#D6DEDC;
-  --brass:#A97B24; --brass-strong:#8A6112; --teal:#14555A;
-  --term-bg:#0E1B1E; --term-text:#C7D6D2; --term-green:#7BD88F;
-  --term-red:#E08A7E; --term-dim:#5E7A76; --btn-text:#FFFFFF;
-}
-@media (prefers-color-scheme: dark){
-  :root{
-    --ink:#0E1B1E; --paper:#0E1B1E; --card:#152528;
-    --text:#DCE7E4; --muted:#8FA6A2; --line:#22383B;
-    --brass:#D9A441; --brass-strong:#E7BC66; --teal:#5FA8AD; --btn-text:#10201F;
-  }
-}
-:root[data-theme="light"]{
-  --ink:#122226; --paper:#F2F5F4; --card:#FFFFFF;
-  --text:#1B2E32; --muted:#54696D; --line:#D6DEDC;
-  --brass:#A97B24; --brass-strong:#8A6112; --teal:#14555A; --btn-text:#FFFFFF;
-}
-:root[data-theme="dark"]{
-  --ink:#0E1B1E; --paper:#0E1B1E; --card:#152528;
-  --text:#DCE7E4; --muted:#8FA6A2; --line:#22383B;
-  --brass:#D9A441; --brass-strong:#E7BC66; --teal:#5FA8AD; --btn-text:#10201F;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
-body{
-  margin:0; background:var(--paper); color:var(--text);
-  font-family:"Segoe UI",system-ui,-apple-system,sans-serif;
-  font-size:17px; line-height:1.6;
-}
-.serif{font-family:Charter,"Iowan Old Style","Palatino Linotype",Georgia,serif}
-.mono{font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace}
-.wrap{max-width:1080px; margin:0 auto; padding:0 24px}
-a{color:var(--brass-strong)}
-a:focus-visible,button:focus-visible{outline:2px solid var(--brass); outline-offset:3px}
+    :root {
+        --neon-pink: #FF2A6D;
+        --neon-cyan: #05D9E8;
+        --neon-purple: #D300C5;
+        --neon-blue: #7B2FFF;
+        --neon-yellow: #FFE700;
+        --sunset-orange: #FF6B35;
+        --dark-void: #0D0221;
+        --dark-purple: #1A0533;
+        --dark-blue: #120458;
+        --grid-color: rgba(5, 217, 232, 0.15);
+        --chrome: linear-gradient(135deg, #E8E8E8 0%, #FFFFFF 25%, #B8B8B8 50%, #FFFFFF 75%, #E8E8E8 100%);
+        --term-green: #39FF88;
+    }
 
-/* header */
-header{border-bottom:1px solid var(--line)}
-.nav{display:flex; align-items:baseline; justify-content:space-between; padding:20px 0}
-.mark{font-family:Charter,Georgia,serif; font-size:1.5rem; font-weight:700; color:var(--text); text-decoration:none; letter-spacing:.01em}
-.mark span{color:var(--brass)}
-.nav nav{display:flex; gap:22px; font-size:.92rem}
-.nav nav a{color:var(--muted); text-decoration:none}
-.nav nav a:hover{color:var(--brass-strong)}
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
-/* hero */
-.hero{display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center; padding:72px 0 64px}
-.hero h1{font-family:Charter,"Iowan Old Style",Georgia,serif; font-size:clamp(2rem,4.4vw,3.1rem); line-height:1.12; margin:0 0 20px; text-wrap:balance; font-weight:700}
-.hero h1 em{font-style:normal; color:var(--brass)}
-.hero p.lead{font-size:1.12rem; color:var(--muted); max-width:34em; margin:0 0 30px}
-.cta{display:flex; gap:14px; flex-wrap:wrap}
-.btn{display:inline-block; padding:12px 22px; border-radius:4px; text-decoration:none; font-weight:600; font-size:.98rem}
-.btn.primary{background:var(--brass); color:var(--btn-text); border:1px solid var(--brass)}
-.btn.primary:hover{background:var(--brass-strong); border-color:var(--brass-strong)}
-.btn.ghost{border:1px solid var(--line); color:var(--text)}
-.btn.ghost:hover{border-color:var(--brass)}
-.kicker{text-transform:uppercase; letter-spacing:.14em; font-size:.76rem; color:var(--teal); font-weight:600; margin:0 0 14px}
+    body {
+        font-family: 'Rajdhani', sans-serif;
+        background: var(--dark-void);
+        color: white;
+        overflow-x: hidden;
+        line-height: 1.6;
+    }
 
-/* terminal */
-.term{background:var(--term-bg); border-radius:8px; border:1px solid #23393C;
-  box-shadow:0 18px 50px -18px rgba(8,20,22,.55); overflow:hidden; min-height:340px}
-.term-bar{display:flex; align-items:center; gap:8px; padding:10px 14px; background:#132528; border-bottom:1px solid #1D3134}
-.dot{width:10px; height:10px; border-radius:50%; background:#33504D}
-.term-title{margin-left:8px; font-size:.75rem; color:var(--term-dim); font-family:Consolas,monospace}
-.badge-off{margin-left:auto; font-size:.7rem; color:var(--term-red); border:1px solid #4A3230; border-radius:99px; padding:2px 9px; font-family:Consolas,monospace}
-.term-body{padding:18px 18px 22px; font-family:"Cascadia Code",Consolas,Menlo,monospace; font-size:.83rem; line-height:1.75; color:var(--term-text); white-space:pre-wrap}
-.t-dim{color:var(--term-dim)} .t-green{color:var(--term-green)} .t-red{color:var(--term-red)} .t-brass{color:#D9A441}
-.cursor{display:inline-block; width:.55em; height:1.05em; background:var(--term-green); vertical-align:text-bottom; animation:blink 1s steps(1) infinite}
-@keyframes blink{50%{opacity:0}}
-@media (prefers-reduced-motion: reduce){ .cursor{animation:none} }
+    /* Grid Background */
+    .grid-bg {
+        position: fixed; inset: 0;
+        background:
+            linear-gradient(180deg, transparent 0%, var(--dark-void) 100%),
+            repeating-linear-gradient(0deg, transparent, transparent 40px, var(--grid-color) 40px, var(--grid-color) 41px),
+            repeating-linear-gradient(90deg, transparent, transparent 40px, var(--grid-color) 40px, var(--grid-color) 41px);
+        z-index: 0;
+    }
+    .grid-floor {
+        position: fixed; bottom: 0; left: -50%; right: -50%; height: 50vh;
+        background:
+            repeating-linear-gradient(90deg, transparent, transparent 60px, var(--neon-cyan) 60px, var(--neon-cyan) 61px),
+            repeating-linear-gradient(0deg, transparent, transparent 30px, var(--neon-purple) 30px, var(--neon-purple) 31px);
+        transform: rotateX(60deg); transform-origin: top center;
+        opacity: 0.3; animation: gridMove 20s linear infinite;
+        z-index: 0;
+    }
+    @keyframes gridMove { 0% { background-position: 0 0, 0 0; } 100% { background-position: 0 300px, 0 300px; } }
+    @media (prefers-reduced-motion: reduce) { .grid-floor { animation: none; } }
 
-/* sections */
-section{padding:64px 0; border-top:1px solid var(--line)}
-h2{font-family:Charter,Georgia,serif; font-size:1.75rem; margin:0 0 8px; text-wrap:balance}
-.sub{color:var(--muted); margin:0 0 36px; max-width:44em}
-.grid4{display:grid; grid-template-columns:repeat(4,1fr); gap:20px}
-.card{background:var(--card); border:1px solid var(--line); border-radius:6px; padding:22px}
-.card h3{margin:0 0 8px; font-size:1.02rem}
-.card h3::before{content:""; display:block; width:26px; height:3px; background:var(--brass); margin-bottom:14px}
-.card p{margin:0; font-size:.92rem; color:var(--muted)}
+    /* Navigation */
+    nav {
+        position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+        padding: 1rem 5%;
+        display: flex; justify-content: space-between; align-items: center;
+        background: linear-gradient(180deg, var(--dark-void) 0%, transparent 100%);
+        transition: all 0.3s ease;
+    }
+    nav.scrolled {
+        background: rgba(13, 2, 33, 0.95);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--neon-cyan);
+        box-shadow: 0 0 20px rgba(5, 217, 232, 0.3);
+    }
+    .logo {
+        font-family: 'Orbitron', sans-serif; font-size: 1.5rem; font-weight: 800;
+        text-decoration: none; display: flex; align-items: center; gap: 0.75rem;
+        color: var(--neon-cyan);
+        text-shadow: 0 0 5px var(--neon-cyan), 0 0 10px var(--neon-cyan);
+    }
+    .logo-icon {
+        width: 45px; height: 45px;
+        background: linear-gradient(135deg, var(--neon-pink) 0%, var(--neon-purple) 100%);
+        clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 1.2rem; color: white; text-shadow: none;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+        color: white; text-decoration: none;
+        font-family: 'Orbitron', sans-serif; font-size: 0.8rem; font-weight: 500;
+        letter-spacing: 2px; text-transform: uppercase;
+        transition: all 0.3s ease; position: relative;
+    }
+    .nav-links a::after {
+        content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px;
+        background: var(--neon-pink); box-shadow: 0 0 10px var(--neon-pink);
+        transition: width 0.3s ease;
+    }
+    .nav-links a:hover { color: var(--neon-pink); text-shadow: 0 0 10px var(--neon-pink); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta {
+        padding: 0.75rem 1.5rem; background: transparent;
+        border: 2px solid var(--neon-pink); color: var(--neon-pink);
+        font-family: 'Orbitron', sans-serif; font-size: 0.8rem; font-weight: 600;
+        letter-spacing: 2px; text-transform: uppercase; cursor: pointer;
+        transition: all 0.3s ease; position: relative; overflow: hidden;
+        text-decoration: none; display: inline-block;
+    }
+    .nav-cta::before {
+        content: ''; position: absolute; inset: 0; background: var(--neon-pink);
+        transform: translateX(-100%); transition: transform 0.3s ease; z-index: -1;
+    }
+    .nav-cta:hover { color: white; box-shadow: 0 0 20px var(--neon-pink); }
+    .nav-cta:hover::before { transform: translateX(0); }
 
-/* architecture strip */
-.arch{display:flex; align-items:stretch; gap:0; background:var(--card); border:1px solid var(--line); border-radius:6px; overflow-x:auto}
-.arch > div{flex:1; min-width:190px; padding:22px; border-right:1px solid var(--line)}
-.arch > div:last-child{border-right:none}
-.arch .who{font-size:.74rem; text-transform:uppercase; letter-spacing:.12em; color:var(--teal); font-weight:600}
-.arch .what{font-family:"Cascadia Code",Consolas,monospace; font-size:.9rem; margin:8px 0 6px; color:var(--text)}
-.arch p{font-size:.85rem; color:var(--muted); margin:0}
-.arrow-note{font-size:.85rem; color:var(--muted); margin-top:14px}
+    /* Hero */
+    .hero {
+        min-height: 100vh;
+        display: grid; grid-template-columns: 1.05fr 1fr; gap: 3rem; align-items: center;
+        position: relative; padding: 8rem 5% 4rem; z-index: 1;
+    }
+    .hero-tag {
+        display: inline-flex; align-items: center; gap: 0.75rem;
+        padding: 0.5rem 1.5rem; border: 1px solid var(--neon-cyan);
+        font-family: 'Share Tech Mono', monospace; font-size: 0.85rem;
+        color: var(--neon-cyan); margin-bottom: 2rem;
+        letter-spacing: 3px; text-transform: uppercase;
+    }
+    .hero-tag-pulse {
+        width: 8px; height: 8px; background: var(--neon-cyan); border-radius: 50%;
+        animation: pulse 1.5s infinite; box-shadow: 0 0 10px var(--neon-cyan);
+    }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+    @media (prefers-reduced-motion: reduce) { .hero-tag-pulse { animation: none; } }
+    .hero-title {
+        font-family: 'Orbitron', sans-serif;
+        font-size: clamp(2.2rem, 5.5vw, 4rem);
+        font-weight: 900; line-height: 1.05; margin-bottom: 1.5rem;
+        text-transform: uppercase; letter-spacing: -1px;
+    }
+    .hero-title .line-1 {
+        display: block;
+        background: var(--chrome);
+        -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+    }
+    .hero-title .line-2 {
+        display: block;
+        background: linear-gradient(90deg, var(--neon-pink) 0%, var(--neon-purple) 50%, var(--neon-cyan) 100%);
+        -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        filter: drop-shadow(0 0 20px var(--neon-pink));
+    }
+    .hero-description {
+        font-size: 1.2rem; color: rgba(255, 255, 255, 0.8);
+        max-width: 540px; margin-bottom: 2.5rem; font-weight: 500;
+    }
+    .hero-cta-group { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    .btn-primary {
+        padding: 1.1rem 2.6rem;
+        background: linear-gradient(90deg, var(--neon-pink) 0%, var(--neon-purple) 100%);
+        border: none; color: white;
+        font-family: 'Orbitron', sans-serif; font-size: 0.9rem; font-weight: 700;
+        letter-spacing: 2px; text-transform: uppercase; cursor: pointer;
+        transition: all 0.3s ease; text-decoration: none; display: inline-block;
+        clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+    }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 0 20px var(--neon-pink), 0 0 40px var(--neon-purple); }
+    .btn-secondary {
+        padding: 1.1rem 2.6rem; background: transparent;
+        border: 2px solid var(--neon-cyan); color: var(--neon-cyan);
+        font-family: 'Orbitron', sans-serif; font-size: 0.9rem; font-weight: 700;
+        letter-spacing: 2px; text-transform: uppercase; cursor: pointer;
+        transition: all 0.3s ease; text-decoration: none; display: inline-block;
+        clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+    }
+    .btn-secondary:hover { background: var(--neon-cyan); color: var(--dark-void); box-shadow: 0 0 30px var(--neon-cyan); }
 
-/* roles table */
-table{width:100%; border-collapse:collapse; font-size:.93rem}
-.table-scroll{overflow-x:auto; border:1px solid var(--line); border-radius:6px; background:var(--card)}
-th,td{text-align:left; padding:13px 18px; border-bottom:1px solid var(--line); vertical-align:top}
-tr:last-child td{border-bottom:none}
-th{font-size:.76rem; text-transform:uppercase; letter-spacing:.1em; color:var(--teal)}
-td:first-child{font-weight:600; white-space:nowrap}
-td:nth-child(2){white-space:nowrap; font-family:Consolas,monospace; font-size:.85rem; color:var(--brass-strong)}
+    /* Terminal (hero demo) */
+    .term {
+        background: rgba(13, 2, 33, 0.9);
+        border: 1px solid var(--neon-cyan);
+        box-shadow: 0 0 10px rgba(5, 217, 232, 0.4), 0 0 30px rgba(5, 217, 232, 0.15), inset 0 0 20px rgba(5, 217, 232, 0.05);
+        clip-path: polygon(0 15px, 15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
+        overflow: hidden; min-height: 360px;
+    }
+    .term-bar {
+        display: flex; align-items: center; gap: 8px; padding: 12px 16px;
+        background: rgba(26, 5, 51, 0.9); border-bottom: 1px solid rgba(5, 217, 232, 0.4);
+    }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(5, 217, 232, 0.35); }
+    .term-title { margin-left: 8px; font-size: 0.75rem; color: rgba(5, 217, 232, 0.7); font-family: 'Share Tech Mono', monospace; letter-spacing: 1px; }
+    .badge-off {
+        margin-left: auto; font-size: 0.7rem; color: var(--neon-pink);
+        border: 1px solid var(--neon-pink); padding: 2px 10px;
+        font-family: 'Share Tech Mono', monospace; letter-spacing: 1px;
+        text-shadow: 0 0 8px var(--neon-pink);
+    }
+    .term-body {
+        padding: 18px 18px 22px;
+        font-family: 'Share Tech Mono', monospace; font-size: 0.82rem; line-height: 1.8;
+        color: rgba(255, 255, 255, 0.85); white-space: pre-wrap;
+    }
+    .t-dim { color: rgba(255, 255, 255, 0.4); }
+    .t-green { color: var(--term-green); text-shadow: 0 0 6px rgba(57, 255, 136, 0.5); }
+    .t-red { color: var(--neon-pink); }
+    .t-cyan { color: var(--neon-cyan); }
+    .cursor {
+        display: inline-block; width: 0.55em; height: 1.05em;
+        background: var(--term-green); vertical-align: text-bottom;
+        box-shadow: 0 0 8px var(--term-green);
+        animation: blink 1s steps(1) infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+    @media (prefers-reduced-motion: reduce) { .cursor { animation: none; } }
 
-/* process */
-.steps{display:grid; grid-template-columns:repeat(4,1fr); gap:20px; counter-reset:step}
-.step{position:relative; padding:22px 22px 22px; background:var(--card); border:1px solid var(--line); border-radius:6px; counter-increment:step}
-.step::before{content:counter(step,decimal-leading-zero); font-family:Charter,Georgia,serif; font-size:1.5rem; color:var(--brass); display:block; margin-bottom:8px}
-.step h3{margin:0 0 6px; font-size:1rem}
-.step p{margin:0; font-size:.88rem; color:var(--muted)}
-.step .dur{display:inline-block; margin-top:10px; font-size:.74rem; font-family:Consolas,monospace; color:var(--teal)}
+    /* Sections */
+    section { padding: 6rem 5%; position: relative; z-index: 1; }
+    .section-header { text-align: center; margin-bottom: 3.5rem; }
+    .section-tag {
+        display: inline-block; padding: 0.5rem 1.5rem;
+        border: 1px solid var(--neon-pink);
+        font-family: 'Share Tech Mono', monospace; font-size: 0.8rem;
+        color: var(--neon-pink); text-transform: uppercase; letter-spacing: 3px;
+        margin-bottom: 1rem;
+    }
+    .section-title {
+        font-family: 'Orbitron', sans-serif;
+        font-size: clamp(1.8rem, 4.5vw, 3rem); font-weight: 800;
+        text-transform: uppercase; letter-spacing: 2px;
+        background: linear-gradient(90deg, var(--neon-cyan) 0%, var(--neon-pink) 100%);
+        -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .section-subtitle {
+        font-size: 1.1rem; color: rgba(255, 255, 255, 0.7);
+        max-width: 620px; margin: 1rem auto 0;
+    }
 
-/* honesty */
-.honest{background:var(--card); border:1px solid var(--line); border-left:4px solid var(--brass); border-radius:6px; padding:28px 30px}
-.honest ul{margin:14px 0 0; padding-left:20px}
-.honest li{margin-bottom:10px; color:var(--muted)}
-.honest li strong{color:var(--text)}
+    /* Product cards */
+    .products-grid {
+        display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+        max-width: 1200px; margin: 0 auto;
+    }
+    .product-card {
+        background: rgba(13, 2, 33, 0.8);
+        border: 1px solid rgba(5, 217, 232, 0.3);
+        padding: 2.5rem 2rem; position: relative;
+        transition: all 0.4s ease;
+        clip-path: polygon(0 15px, 15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
+        display: flex; flex-direction: column;
+    }
+    .product-card::before {
+        content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+        background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+        transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease;
+    }
+    .product-card:hover {
+        border-color: var(--neon-cyan);
+        box-shadow: 0 0 20px rgba(5, 217, 232, 0.3), inset 0 0 30px rgba(5, 217, 232, 0.05);
+        transform: translateY(-5px);
+    }
+    .product-card:hover::before { transform: scaleX(1); }
+    .product-name {
+        font-family: 'Orbitron', sans-serif; font-size: 1.4rem; font-weight: 800;
+        text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.35rem;
+        color: var(--neon-cyan); text-shadow: 0 0 10px rgba(5, 217, 232, 0.5);
+    }
+    .product-card:nth-child(2) .product-name { color: var(--neon-pink); text-shadow: 0 0 10px rgba(255, 42, 109, 0.5); }
+    .product-card:nth-child(3) .product-name { color: var(--neon-purple); text-shadow: 0 0 10px rgba(211, 0, 197, 0.5); }
+    .product-for {
+        font-family: 'Share Tech Mono', monospace; font-size: 0.78rem;
+        color: rgba(255, 255, 255, 0.5); letter-spacing: 1px; text-transform: uppercase;
+        margin-bottom: 1.2rem;
+    }
+    .product-desc { color: rgba(255, 255, 255, 0.75); font-size: 0.97rem; line-height: 1.7; flex: 1; }
+    .product-desc strong { color: white; }
+    .product-status {
+        margin-top: 1.5rem;
+        font-family: 'Share Tech Mono', monospace; font-size: 0.75rem;
+        letter-spacing: 2px; text-transform: uppercase; color: var(--term-green);
+    }
+    .product-status.soon { color: var(--neon-yellow); }
 
-/* tech facts */
-.facts{display:grid; grid-template-columns:repeat(3,1fr); gap:20px}
-.fact{border-top:3px solid var(--teal); padding-top:14px}
-.fact .k{font-size:.76rem; text-transform:uppercase; letter-spacing:.12em; color:var(--teal); font-weight:600}
-.fact .v{font-size:1rem; margin-top:4px}
-.fact .v small{display:block; color:var(--muted); font-size:.85rem; margin-top:2px}
+    /* Feature cards */
+    .features { background: linear-gradient(180deg, transparent 0%, rgba(26, 5, 51, 0.5) 100%); }
+    .features-grid {
+        display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;
+        max-width: 1200px; margin: 0 auto;
+    }
+    .feature-card {
+        background: rgba(13, 2, 33, 0.8);
+        border: 1px solid rgba(5, 217, 232, 0.3);
+        padding: 2rem 1.6rem; position: relative; transition: all 0.4s ease;
+        clip-path: polygon(0 15px, 15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
+    }
+    .feature-card:hover {
+        border-color: var(--neon-cyan);
+        box-shadow: 0 0 20px rgba(5, 217, 232, 0.3);
+        transform: translateY(-5px);
+    }
+    .feature-icon {
+        width: 54px; height: 54px;
+        background: linear-gradient(135deg, var(--neon-pink) 0%, var(--neon-purple) 100%);
+        clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+        display: flex; align-items: center; justify-content: center;
+        margin-bottom: 1.3rem; font-size: 1.3rem;
+    }
+    .feature-card:nth-child(2) .feature-icon { background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-blue) 100%); }
+    .feature-card:nth-child(3) .feature-icon { background: linear-gradient(135deg, var(--sunset-orange) 0%, var(--neon-pink) 100%); }
+    .feature-card:nth-child(4) .feature-icon { background: linear-gradient(135deg, var(--neon-purple) 0%, var(--neon-blue) 100%); }
+    .feature-title {
+        font-family: 'Orbitron', sans-serif; font-size: 1.05rem; font-weight: 700;
+        color: white; margin-bottom: 0.7rem; text-transform: uppercase; letter-spacing: 1px;
+    }
+    .feature-description { color: rgba(255, 255, 255, 0.7); font-size: 0.93rem; line-height: 1.7; }
 
-/* cta + footer */
-.finale{text-align:left; padding:72px 0}
-.finale h2{font-size:2rem}
-footer{border-top:1px solid var(--line); padding:26px 0; font-size:.85rem; color:var(--muted)}
-footer .wrap{display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap}
+    /* Process timeline */
+    .process { background: linear-gradient(180deg, rgba(26, 5, 51, 0.5) 0%, transparent 100%); }
+    .process-timeline { max-width: 900px; margin: 0 auto; position: relative; }
+    .process-timeline::before {
+        content: ''; position: absolute; top: 0; bottom: 0; left: 50%; width: 2px;
+        background: linear-gradient(180deg, var(--neon-cyan), var(--neon-pink), var(--neon-purple));
+        box-shadow: 0 0 10px var(--neon-cyan);
+    }
+    .process-step { display: flex; align-items: center; margin-bottom: 3rem; position: relative; }
+    .process-step:nth-child(even) { flex-direction: row-reverse; }
+    .process-step:nth-child(even) .process-content { text-align: right; padding-right: 4rem; padding-left: 0; }
+    .process-content { flex: 1; padding-left: 4rem; }
+    .process-number {
+        position: absolute; left: 50%; transform: translateX(-50%);
+        width: 60px; height: 60px; background: var(--dark-void);
+        border: 2px solid var(--neon-cyan);
+        display: flex; align-items: center; justify-content: center;
+        font-family: 'Orbitron', sans-serif; font-size: 1.25rem; font-weight: 700;
+        color: var(--neon-cyan);
+        box-shadow: 0 0 20px rgba(5, 217, 232, 0.5);
+        clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    }
+    .process-title {
+        font-family: 'Orbitron', sans-serif; font-size: 1.3rem; font-weight: 700;
+        color: var(--neon-pink); margin-bottom: 0.5rem; text-transform: uppercase;
+    }
+    .process-text { color: rgba(255, 255, 255, 0.7); font-size: 1rem; }
+    .process-dur {
+        display: inline-block; margin-top: 0.4rem;
+        font-family: 'Share Tech Mono', monospace; font-size: 0.8rem;
+        color: var(--neon-cyan); letter-spacing: 2px;
+    }
 
-@media (max-width:900px){
-  .hero{grid-template-columns:1fr; padding-top:48px}
-  .grid4,.steps,.facts{grid-template-columns:1fr 1fr}
-}
-@media (max-width:560px){
-  .grid4,.steps,.facts{grid-template-columns:1fr}
-  .nav nav{display:none}
-}
+    /* Honesty (corner-bracket card) */
+    .honest-container { max-width: 820px; margin: 0 auto; }
+    .honest-card {
+        background: rgba(13, 2, 33, 0.8);
+        border: 1px solid rgba(5, 217, 232, 0.3);
+        padding: 3rem; position: relative;
+    }
+    .honest-card::before, .honest-card::after {
+        content: ''; position: absolute; width: 30px; height: 30px;
+        border: 2px solid var(--neon-pink);
+    }
+    .honest-card::before { top: -1px; left: -1px; border-right: none; border-bottom: none; }
+    .honest-card::after { bottom: -1px; right: -1px; border-left: none; border-top: none; }
+    .honest-card ul { list-style: none; }
+    .honest-card li { margin-bottom: 1.2rem; color: rgba(255, 255, 255, 0.75); font-size: 1.05rem; padding-left: 1.6rem; position: relative; }
+    .honest-card li:last-child { margin-bottom: 0; }
+    .honest-card li::before {
+        content: '»'; position: absolute; left: 0; color: var(--neon-cyan);
+        font-family: 'Share Tech Mono', monospace; text-shadow: 0 0 8px var(--neon-cyan);
+    }
+    .honest-card li strong { color: white; }
+
+    /* Stats (tech facts) */
+    .stats-container {
+        max-width: 1100px; margin: 0 auto;
+        display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6rem;
+    }
+    .stat-item {
+        text-align: center; padding: 1.8rem 1.2rem;
+        background: rgba(13, 2, 33, 0.6);
+        border: 1px solid rgba(255, 42, 109, 0.3); position: relative;
+    }
+    .stat-item::before {
+        content: ''; position: absolute; top: -1px; left: 20%; right: 20%; height: 2px;
+        background: linear-gradient(90deg, transparent, var(--neon-pink), transparent);
+    }
+    .stat-value {
+        font-family: 'Orbitron', sans-serif; font-size: 1.5rem; font-weight: 900;
+        background: linear-gradient(180deg, var(--neon-cyan) 0%, var(--neon-pink) 100%);
+        -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        margin-bottom: 0.4rem;
+    }
+    .stat-label {
+        font-family: 'Share Tech Mono', monospace; font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.6); text-transform: uppercase; letter-spacing: 2px;
+    }
+    .stat-note { font-size: 0.85rem; color: rgba(255, 255, 255, 0.5); margin-top: 0.4rem; }
+
+    /* CTA */
+    .cta-section { text-align: center; position: relative; overflow: hidden; }
+    .cta-section::before {
+        content: ''; position: absolute; top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        width: 600px; height: 600px;
+        background: radial-gradient(circle, var(--neon-purple) 0%, transparent 70%);
+        opacity: 0.2; filter: blur(60px);
+    }
+    .cta-content { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+    .cta-title {
+        font-family: 'Orbitron', sans-serif;
+        font-size: clamp(1.8rem, 4.5vw, 3rem); font-weight: 900;
+        text-transform: uppercase; margin-bottom: 1rem;
+        background: linear-gradient(90deg, var(--neon-cyan) 0%, white 50%, var(--neon-pink) 100%);
+        -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .cta-subtitle { color: rgba(255, 255, 255, 0.7); font-size: 1.2rem; margin-bottom: 2.5rem; }
+    .cta-buttons { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
+
+    /* Footer */
+    footer {
+        background: var(--dark-void); padding: 3rem 5% 2rem;
+        border-top: 1px solid rgba(5, 217, 232, 0.2);
+        position: relative; z-index: 1;
+    }
+    .footer-bottom {
+        max-width: 1200px; margin: 0 auto;
+        display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-bottom p {
+        font-family: 'Share Tech Mono', monospace;
+        color: rgba(255, 255, 255, 0.4); font-size: 0.85rem;
+    }
+    .footer-bottom a { color: var(--neon-cyan); text-decoration: none; }
+    .footer-bottom a:hover { text-shadow: 0 0 10px var(--neon-cyan); }
+
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--neon-yellow); outline-offset: 3px; }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+        .features-grid { grid-template-columns: 1fr 1fr; }
+        .products-grid { grid-template-columns: 1fr; max-width: 560px; }
+        .stats-container { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 900px) {
+        .hero { grid-template-columns: 1fr; padding-top: 7rem; }
+    }
+    @media (max-width: 768px) {
+        nav { padding: 1rem; }
+        .nav-links { display: none; }
+        .features-grid, .stats-container { grid-template-columns: 1fr; }
+        .process-timeline::before { left: 30px; }
+        .process-step, .process-step:nth-child(even) { flex-direction: column; align-items: flex-start; padding-left: 80px; }
+        .process-content, .process-step:nth-child(even) .process-content { padding: 0; text-align: left; }
+        .process-number { left: 30px; transform: translateX(-50%); }
+    }
 </style>
 </head>
 <body>
+    <div class="grid-bg"></div>
+    <div class="grid-floor"></div>
 
-<header>
-  <div class="wrap nav">
-    <a class="mark" href="#">Gala<span>.</span></a>
-    <nav>
-      <a href="#neden">Neden</a>
-      <a href="#nasil">Nasıl çalışır</a>
-      <a href="#roller">Kimler için</a>
-      <a href="#acik">Açık konuşalım</a>
-      <a href="#iletisim">İletişim</a>
+    <nav id="navbar">
+        <a href="#" class="logo">
+            <div class="logo-icon">G</div>
+            GALA
+        </a>
+        <ul class="nav-links">
+            <li><a href="#urunler">Ürünler</a></li>
+            <li><a href="#neden">Neden</a></li>
+            <li><a href="#surec">Süreç</a></li>
+            <li><a href="#acik">Açık Konuşalım</a></li>
+        </ul>
+        <a class="nav-cta" href="mailto:esatelmas@gmail.com?subject=Gala%20demo%20talebi">Demo İste</a>
     </nav>
-  </div>
-</header>
 
-<div class="wrap hero">
-  <div>
-    <p class="kicker">Şirket içi yapay zekâ altyapısı</p>
-    <h1>Yapay zekâ içeri girsin.<br>Kodunuz <em>dışarı çıkmasın.</em></h1>
-    <p class="lead">Gala, şirketinizin kendi sunucusunda çalışan anahtar teslim yapay zekâ paketidir:
-    kod yazan ajan asistan, tüm ekip için iç sohbet, kullanım ve bütçe yönetimi.
-    Kullanıcı başına lisans ücreti yok. İnternet bile şart değil — yandaki kayıt uçak modunda alındı.</p>
-    <div class="cta">
-      <a class="btn primary" href="mailto:esatelmas@gmail.com?subject=Gala%20demo%20talebi">Demo isteyin</a>
-      <a class="btn ghost" href="#nasil">Nasıl çalışır?</a>
-    </div>
-  </div>
-  <div class="term" aria-label="Uçak modunda çalışan yapay zekâ asistanı terminal kaydı">
-    <div class="term-bar">
-      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-      <span class="term-title">demo — uçak modu</span>
-      <span class="badge-off">✈ ÇEVRİMDIŞI</span>
-    </div>
-    <div class="term-body" id="termbody"></div>
-  </div>
-</div>
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-tag">
+                <div class="hero-tag-pulse"></div>
+                Şirket İçi Yapay Zekâ // KVKK Uyumlu
+            </div>
+            <h1 class="hero-title">
+                <span class="line-1">Yapay Zekâ</span>
+                <span class="line-2">Veriniz İçeride</span>
+            </h1>
+            <p class="hero-description">
+                Kod yazan ajan asistan, belgelerinizle konuşan iç sohbet, ekip bazlı bütçe ve
+                kullanım kontrolü — hepsi kendi sunucunuzda. Kullanıcı başına lisans ücreti yok.
+                İnternet bile şart değil: yandaki kayıt uçak modunda alındı.
+            </p>
+            <div class="hero-cta-group">
+                <a class="btn-primary" href="mailto:esatelmas@gmail.com?subject=Gala%20demo%20talebi">Demo İsteyin</a>
+                <a class="btn-secondary" href="#urunler">Ürünleri Gör</a>
+            </div>
+        </div>
+        <div class="term" aria-label="Uçak modunda çalışan yapay zekâ asistanı terminal kaydı">
+            <div class="term-bar">
+                <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                <span class="term-title">DEMO // UÇAK MODU</span>
+                <span class="badge-off">✈ ÇEVRİMDIŞI</span>
+            </div>
+            <div class="term-body" id="termbody"></div>
+        </div>
+    </section>
 
-<section id="neden">
-  <div class="wrap">
-    <h2>Neden Gala?</h2>
-    <p class="sub">Ekipler bugün ikiye bölünmüş durumda: kodu buluta yapıştırıp gizliliği göze almak,
-    ya da yapay zekâdan uzak durup geride kalmak. İkisi de kabul edilebilir değil.</p>
-    <div class="grid4">
-      <div class="card">
-        <h3>Veri şirkette kalır</h3>
-        <p>Modeller kendi sunucunuzda çalışır. İstemler, kod ve dokümanlar hiçbir dış servise gitmez.
-        KVKK ve müşteri sözleşmeleriyle kavga etmezsiniz; kapalı ağda dahi çalışır.</p>
-      </div>
-      <div class="card">
-        <h3>Faturasız kullanım</h3>
-        <p>Tüm bileşenler açık kaynak: kullanıcı başına, ay başına, token başına ücret yok.
-        Bir kez donanım yatırımı; kullanım arttıkça maliyet artmaz.</p>
-      </div>
-      <div class="card">
-        <h3>İş yapan asistan</h3>
-        <p>Sohbet kutusu değil: dosyayı bulan, okuyan, düzelten ve diff öneren ajan asistan.
-        Geliştirici terminalinden çıkmadan çalışır.</p>
-      </div>
-      <div class="card">
-        <h3>Kontrol yönetimde</h3>
-        <p>Ekip başına API anahtarı ve aylık bütçe; kim, hangi model, ne kadar —
-        hepsi yönetim panosunda. Personel ayrılınca anahtar tek komutla iptal.</p>
-      </div>
-    </div>
-  </div>
-</section>
+    <section id="urunler">
+        <div class="section-header">
+            <span class="section-tag">Ürün Ailesi</span>
+            <h2 class="section-title">Kapıdan İçeri Üç Yol</h2>
+            <p class="section-subtitle">
+                Aynı çekirdek altyapı — ağ geçidi, yerel modeller, bütçe kontrolü — üç farklı pakette.
+            </p>
+        </div>
+        <div class="products-grid">
+            <div class="product-card">
+                <h3 class="product-name">Gala</h3>
+                <div class="product-for">// Yazılım şirketleri</div>
+                <p class="product-desc">
+                    <strong>Kod yazan ajan asistan.</strong> Geliştiriciler terminalden dosya okuyup
+                    düzelten asistanla çalışır; analist, tester ve PO tarayıcıdan aynı altyapıyı kullanır.
+                    Ekip başına anahtar, aylık bütçe, kullanım panosu.
+                </p>
+                <div class="product-status">● SATIŞTA</div>
+            </div>
+            <div class="product-card">
+                <h3 class="product-name">GalaChat</h3>
+                <div class="product-for">// Yazılım geliştirmeyen firmalar</div>
+                <p class="product-desc">
+                    <strong>Belgelerinizle konuşan iç asistan.</strong> Yönetmelik, prosedür ve
+                    sözleşmelerinizi yükleyin; personel sorusuna belgeye dayalı, kaynak gösteren
+                    cevap alsın. Belgede olmayana "belgede yok" der — uydurmaz.
+                </p>
+                <div class="product-status">● SATIŞTA</div>
+            </div>
+            <div class="product-card">
+                <h3 class="product-name">GalaFlow</h3>
+                <div class="product-for">// Otomasyon ihtiyacı olanlar</div>
+                <p class="product-desc">
+                    <strong>İş akışlarınızı otomatikleştiren ajanlar.</strong> E-posta özetleme ve taslak
+                    yanıt, belgeden veri çıkarma, periyodik rapor üretimi — hepsi aynı güvenli
+                    altyapı üzerinde, aynı bütçe kontrolüyle.
+                </p>
+                <div class="product-status soon">◌ YAKINDA</div>
+            </div>
+        </div>
+    </section>
 
-<section id="nasil">
-  <div class="wrap">
-    <h2>Nasıl çalışır?</h2>
-    <p class="sub">Üç katman, tek sunucu. Yarın daha güçlü donanım aldığınızda ya da yeni model çıktığında
-    değişiklik yalnız sunucuda yapılır — geliştirici bilgisayarlarında tek satır değişmez.</p>
-    <div class="arch">
-      <div>
-        <span class="who">Kullanıcılar</span>
-        <div class="what">OpenCode · tarayıcı</div>
-        <p>Geliştiriciler terminalden, diğer roller ChatGPT benzeri iç arayüzden bağlanır. Kişisel API anahtarıyla, şirket ağı üzerinden.</p>
-      </div>
-      <div>
-        <span class="who">Gala ağ geçidi</span>
-        <div class="what">anahtar · bütçe · kayıt</div>
-        <p>Her istek buradan geçer: kimlik doğrulanır, bütçe kontrol edilir, kullanım kaydedilir. Sabit model adları sunar.</p>
-      </div>
-      <div>
-        <span class="who">Modeller</span>
-        <div class="what">şirket GPU sunucusu</div>
-        <p>Açık kaynak modeller (Apache 2.0) kendi donanımınızda çalışır. İsterseniz seçili görevler için kontrollü bulut ek modülü.</p>
-      </div>
-    </div>
-    <p class="arrow-note">Kurulumdan sonra internet bağlantısı zorunlu değildir; tamamen izole ağlar için çevrimdışı kurulum modülü mevcuttur.</p>
-  </div>
-</section>
+    <section class="features" id="neden">
+        <div class="section-header">
+            <span class="section-tag">Neden Gala</span>
+            <h2 class="section-title">Sızıntı Yok · Fatura Yok</h2>
+            <p class="section-subtitle">
+                Ekipler bugün ya kodu buluta yapıştırıp gizliliği göze alıyor ya da yapay zekâdan
+                uzak durup geride kalıyor. İkisi de kabul edilebilir değil.
+            </p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">&#128274;</div>
+                <h3 class="feature-title">Veri İçeride</h3>
+                <p class="feature-description">
+                    Modeller kendi sunucunuzda çalışır. İstemler, kod ve belgeler hiçbir dış servise
+                    gitmez; kapalı ağda dahi çalışır.
+                </p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">&#128184;</div>
+                <h3 class="feature-title">Lisans Ücreti Yok</h3>
+                <p class="feature-description">
+                    Açık kaynak yığın: kullanıcı, ay veya token başına ücret yok. Bir donanım
+                    yatırımı; kullanım arttıkça maliyet artmaz.
+                </p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">&#129302;</div>
+                <h3 class="feature-title">İş Yapan Ajan</h3>
+                <p class="feature-description">
+                    Sohbet kutusu değil: dosyayı bulan, okuyan, düzelten ve kaynak gösteren
+                    asistanlar. Çıktı her zaman insan onayından geçer.
+                </p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">&#128200;</div>
+                <h3 class="feature-title">Kontrol Yönetimde</h3>
+                <p class="feature-description">
+                    Ekip başına anahtar ve bütçe; kim, hangi model, ne kadar — panoda. Ayrılan
+                    personelin anahtarı tek komutla iptal.
+                </p>
+            </div>
+        </div>
+    </section>
 
-<section id="roller">
-  <div class="wrap">
-    <h2>Sadece geliştiriciler için değil</h2>
-    <p class="sub">Tek altyapı, bütün üretim hattı. Geliştirici olmayan roller hiçbir kurulum yapmaz — tarayıcı yeter.</p>
-    <div class="table-scroll">
-      <table>
-        <tr><th>Rol</th><th>Araç</th><th>Günlük kullanım</th></tr>
-        <tr><td>Geliştirici</td><td>opencode</td><td>Kod yazma ve düzeltme, hata çözme, test ekleme, PR özeti — dosyalar üzerinde çalışan ajan asistanla</td></tr>
-        <tr><td>Analist</td><td>tarayıcı</td><td>Müşteri talebinden user story, kabul kriterleri, edge-case listesi</td></tr>
-        <tr><td>Tester</td><td>tarayıcı</td><td>Kabul kriterinden test senaryoları, test verisi üretimi, bug raporu netleştirme</td></tr>
-        <tr><td>Ürün sahibi</td><td>tarayıcı</td><td>Story bölme, release notu, paydaş iletişimi taslakları</td></tr>
-        <tr><td>Yönetim</td><td>pano</td><td>Ekip bazında kullanım, harcama ve adaptasyon raporları</td></tr>
-      </table>
-    </div>
-  </div>
-</section>
+    <section class="process" id="surec">
+        <div class="section-header">
+            <span class="section-tag">Kurulum Protokolü</span>
+            <h2 class="section-title">Anahtar Teslim Süreç</h2>
+        </div>
+        <div class="process-timeline">
+            <div class="process-step">
+                <div class="process-content">
+                    <h3 class="process-title">Değerlendirme</h3>
+                    <p class="process-text">Ekip, donanım, ağ ve süreç analizi; boyutlandırma önerisi ve teklif.</p>
+                    <span class="process-dur">1 GÜN</span>
+                </div>
+                <div class="process-number">01</div>
+            </div>
+            <div class="process-step">
+                <div class="process-content">
+                    <h3 class="process-title">Kurulum</h3>
+                    <p class="process-text">Sunucu, modeller, anahtar/bütçe yapısı ve uçtan uca doğrulama testleri.</p>
+                    <span class="process-dur">1–2 GÜN</span>
+                </div>
+                <div class="process-number">02</div>
+            </div>
+            <div class="process-step">
+                <div class="process-content">
+                    <h3 class="process-title">Eğitim</h3>
+                    <p class="process-text">Rol bazlı uygulamalı eğitim — gerçek işlerinizle, slaytsız.</p>
+                    <span class="process-dur">YARIM–2 GÜN</span>
+                </div>
+                <div class="process-number">03</div>
+            </div>
+            <div class="process-step">
+                <div class="process-content">
+                    <h3 class="process-title">Destek &amp; Devir</h3>
+                    <p class="process-text">30 gün uzaktan destek, işletim devri ve Türkçe dokümantasyon.</p>
+                    <span class="process-dur">30 GÜN</span>
+                </div>
+                <div class="process-number">04</div>
+            </div>
+        </div>
+    </section>
 
-<section>
-  <div class="wrap">
-    <h2>Kurulum süreci</h2>
-    <p class="sub">Anahtar teslim: değerlendirmeden işletim devrine kadar biz yürütürüz, sisteminiz size çalışır hâlde teslim edilir.</p>
-    <div class="steps">
-      <div class="step"><h3>Değerlendirme</h3><p>Ekip, donanım, ağ ve süreç analizi; donanım boyutlandırma önerisi ve teklif.</p><span class="dur">1 gün</span></div>
-      <div class="step"><h3>Kurulum</h3><p>Sunucu kurulumu, model seti, anahtar/bütçe yapısı, uçtan uca doğrulama testleri.</p><span class="dur">1–2 gün</span></div>
-      <div class="step"><h3>Eğitim</h3><p>Rol bazlı uygulamalı eğitim: geliştirici, analist/tester/ürün sahibi, BT işletimi.</p><span class="dur">yarım–2 gün</span></div>
-      <div class="step"><h3>Destek</h3><p>30 gün uzaktan destek, haftalık değerlendirme, işletim devri ve dokümantasyon.</p><span class="dur">30 gün</span></div>
-    </div>
-  </div>
-</section>
+    <section id="acik">
+        <div class="section-header">
+            <span class="section-tag">Açık Konuşalım</span>
+            <h2 class="section-title">Sınırları Biz Söyleyelim</h2>
+        </div>
+        <div class="honest-container">
+            <div class="honest-card">
+                <ul>
+                    <li><strong>Yerel modeller Claude ya da GPT değildir.</strong> Rutin işin büyük bölümünü
+                    güvenle taşırlar; en zor işler için neyin dışarı çıkacağını sizin belirlediğiniz
+                    kontrollü hibrit seçenek var.</li>
+                    <li><strong>Kalite donanımla ölçeklenir.</strong> Boyutlandırmayı satış için değil, gerçek
+                    eşzamanlı kullanıma göre yaparız — küçük başlayıp büyümek güvenlidir.</li>
+                    <li><strong>Yapay zekâ taslak üretir, imzayı ekibiniz atar.</strong> Çıktılar inceleme ve
+                    insan onayından geçer; bunu süreçle birlikte kurarız, yerine değil.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
 
-<section id="acik">
-  <div class="wrap">
-    <h2>Açık konuşalım</h2>
-    <p class="sub">Satın alma kararını sağlam vermeniz için, sınırları biz söyleyelim:</p>
-    <div class="honest">
-      <ul>
-        <li><strong>Yerel modeller Claude ya da GPT değildir.</strong> Rutin kodlama işinin büyük bölümünü güvenle taşırlar;
-        en zor işler için, neyin dışarı çıkacağını sizin belirlediğiniz kontrollü hibrit seçenek sunuyoruz.</li>
-        <li><strong>Model kalitesi donanımla ölçeklenir.</strong> 24GB GPU sınıfı bir sunucu ekip için rahat çalışır;
-        boyutlandırmayı satış için değil, gerçek eşzamanlı kullanıma göre yaparız.</li>
-        <li><strong>Yapay zekâ taslak üretir, imzayı ekibiniz atar.</strong> Çıktılar kod incelemesinden ve insan onayından geçer —
-        bunu süreçle birlikte kurarız, yerine değil.</li>
-      </ul>
-    </div>
-  </div>
-</section>
+    <section>
+        <div class="section-header">
+            <span class="section-tag">Teknik Özet</span>
+            <h2 class="section-title">BT'nin İlk Soracakları</h2>
+        </div>
+        <div class="stats-container">
+            <div class="stat-item">
+                <div class="stat-value">UBUNTU + GPU</div>
+                <div class="stat-label">Sunucu</div>
+                <div class="stat-note">8–24GB VRAM sınıfı; büyüme yolu hazır</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">DOCKER ENGINE</div>
+                <div class="stat-label">Yazılım</div>
+                <div class="stat-note">açık kaynak yığın, sürümler sabit</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">2 PORT</div>
+                <div class="stat-label">Ağ</div>
+                <div class="stat-note">yalnız iç ağ; internet sadece kurulumda</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">0 BULUT</div>
+                <div class="stat-label">Bağımlılık</div>
+                <div class="stat-note">hesap yok, abonelik yok, veri çıkışı yok</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">WIN/MAC/LINUX</div>
+                <div class="stat-label">Kullanıcı Tarafı</div>
+                <div class="stat-note">geliştiriciye tek CLI; diğerlerine tarayıcı</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">₺0 LİSANS</div>
+                <div class="stat-label">Kullanıcı Başına</div>
+                <div class="stat-note">donanım bir kez, danışmanlık kapsam bazlı</div>
+            </div>
+        </div>
+    </section>
 
-<section>
-  <div class="wrap">
-    <h2>Teknik özet</h2>
-    <p class="sub">BT ekibinizin ilk soracakları; ayrıntılı gereksinim listesi ve bileşen lisans dökümü teklifle birlikte paylaşılır.</p>
-    <div class="facts">
-      <div class="fact"><span class="k">Sunucu</span><div class="v">Ubuntu 22.04+ · NVIDIA GPU<small>pilot için 24GB VRAM sınıfı; büyüme yolu hazır</small></div></div>
-      <div class="fact"><span class="k">Yazılım</span><div class="v">Docker Engine · açık kaynak yığın<small>MIT / Apache 2.0 bileşenler; sürümler sabitlenir</small></div></div>
-      <div class="fact"><span class="k">Ağ</span><div class="v">2 port, yalnız iç ağ<small>internet sadece kurulum penceresinde gerekir</small></div></div>
-      <div class="fact"><span class="k">Bulut</span><div class="v">Gerekmez<small>hesap yok, API anahtarı yok, abonelik yok</small></div></div>
-      <div class="fact"><span class="k">Kullanıcı tarafı</span><div class="v">Win / macOS / Linux<small>geliştiriciye tek CLI; diğer rollere tarayıcı</small></div></div>
-      <div class="fact"><span class="k">Lisans</span><div class="v">Kullanıcı başına ücret yok<small>donanım bir kez, danışmanlık kapsam bazlı</small></div></div>
-    </div>
-  </div>
-</section>
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2 class="cta-title">Kapıyı Açalım mı?</h2>
+            <p class="cta-subtitle">
+                30 dakikada canlı gösterelim — uçak modunda, kendi makinemizde.
+                Sonrası: 1 günlük değerlendirme ve size özel teklif.
+            </p>
+            <div class="cta-buttons">
+                <a class="btn-primary" href="mailto:esatelmas@gmail.com?subject=Gala%20demo%20talebi">Demo İsteyin</a>
+                <a class="btn-secondary" href="mailto:esatelmas@gmail.com?subject=Gala%20hakkinda">Soru Sorun</a>
+            </div>
+        </div>
+    </section>
 
-<section class="finale" id="iletisim">
-  <div class="wrap">
-    <h2>Ekibinizde görmek ister misiniz?</h2>
-    <p class="sub">30 dakikalık görüşmede sistemi canlı gösterelim — uçak modunda, kendi makinemizde.
-    Sonrası: 1 günlük değerlendirme ve size özel boyutlandırılmış teklif.</p>
-    <div class="cta">
-      <a class="btn primary" href="mailto:esatelmas@gmail.com?subject=Gala%20demo%20talebi">Demo isteyin</a>
-    </div>
-  </div>
-</section>
+    <footer>
+        <div class="footer-bottom">
+            <p>GALA — YAPAY ZEKAYA AÇILAN KAPINIZ</p>
+            <p>&copy; 2026 ESAT ELMAS // <a href="mailto:esatelmas@gmail.com">esatelmas@gmail.com</a></p>
+        </div>
+    </footer>
 
-<footer>
-  <div class="wrap">
-    <span><strong>Gala</strong> — Yapay Zekaya Açılan Kapınız</span>
-    <span>© 2026 · Esat Elmas · esatelmas@gmail.com</span>
-  </div>
-</footer>
+    <script>
+        // Navbar scroll effect
+        var navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', function () {
+            if (window.scrollY > 50) { navbar.classList.add('scrolled'); }
+            else { navbar.classList.remove('scrolled'); }
+        });
 
-<script>
-(function(){
-  var lines = [
-    {t:"$ ping 8.8.8.8", c:""},
-    {t:"Genel hata: ağ erişimi yok.", c:"t-red"},
-    {t:"", c:""},
-    {t:"$ node index.js total", c:""},
-    {t:"Total: 010.505        # bug: toplama yerine birleştirme", c:"t-dim"},
-    {t:"", c:""},
-    {t:"$ opencode \"total komutundaki bug'ı düzelt\"", c:""},
-    {t:"→ index.js okundu", c:"t-dim"},
-    {t:"← index.js düzenlendi (parseFloat eklendi)", c:"t-brass"},
-    {t:"", c:""},
-    {t:"$ node index.js total", c:""},
-    {t:"Total: 15.5", c:"t-green"},
-    {t:"", c:""},
-    {t:"✔ internete çıkan paket: 0", c:"t-green"}
-  ];
-  var el = document.getElementById("termbody");
-  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  function render(upto, partial){
-    var html = "";
-    for (var i=0; i<upto; i++){
-      var l = lines[i];
-      html += l.c ? '<span class="'+l.c+'">'+l.t+"</span>\n" : l.t+"\n";
-    }
-    if (partial !== undefined){
-      var p = lines[upto];
-      var frag = p.t.slice(0, partial);
-      html += p.c ? '<span class="'+p.c+'">'+frag+"</span>" : frag;
-    }
-    el.innerHTML = html + '<span class="cursor"></span>';
-  }
-  if (reduce){ render(lines.length); return; }
-  var li = 0;
-  function nextLine(){
-    if (li >= lines.length){ render(lines.length); return; }
-    var isCmd = lines[li].t.charAt(0) === "$";
-    if (isCmd){
-      var ch = 0;
-      var iv = setInterval(function(){
-        ch++;
-        render(li, ch);
-        if (ch >= lines[li].t.length){
-          clearInterval(iv); li++;
-          setTimeout(nextLine, 420);
-        }
-      }, 26);
-    } else {
-      li++;
-      render(li);
-      setTimeout(nextLine, lines[li-1] && lines[li-1].t === "" ? 140 : 340);
-    }
-  }
-  setTimeout(nextLine, 600);
-})();
-</script>
+        // Terminal demo animation
+        (function () {
+            var lines = [
+                { t: "$ ping 8.8.8.8", c: "" },
+                { t: "Genel hata: ağ erişimi yok.", c: "t-red" },
+                { t: "", c: "" },
+                { t: "$ node index.js total", c: "" },
+                { t: "Total: 010.505        # bug: toplama yerine birleştirme", c: "t-dim" },
+                { t: "", c: "" },
+                { t: "$ opencode \"total komutundaki bug'ı düzelt\"", c: "" },
+                { t: "→ index.js okundu", c: "t-dim" },
+                { t: "← index.js düzenlendi (parseFloat eklendi)", c: "t-cyan" },
+                { t: "", c: "" },
+                { t: "$ node index.js total", c: "" },
+                { t: "Total: 15.5", c: "t-green" },
+                { t: "", c: "" },
+                { t: "✔ internete çıkan paket: 0", c: "t-green" }
+            ];
+            var el = document.getElementById('termbody');
+            var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            function render(upto, partial) {
+                var html = "";
+                for (var i = 0; i < upto; i++) {
+                    var l = lines[i];
+                    html += l.c ? '<span class="' + l.c + '">' + l.t + "</span>\n" : l.t + "\n";
+                }
+                if (partial !== undefined) {
+                    var p = lines[upto];
+                    var frag = p.t.slice(0, partial);
+                    html += p.c ? '<span class="' + p.c + '">' + frag + "</span>" : frag;
+                }
+                el.innerHTML = html + '<span class="cursor"></span>';
+            }
+            if (reduce) { render(lines.length); return; }
+            var li = 0;
+            function nextLine() {
+                if (li >= lines.length) { render(lines.length); return; }
+                var isCmd = lines[li].t.charAt(0) === "$";
+                if (isCmd) {
+                    var ch = 0;
+                    var iv = setInterval(function () {
+                        ch++;
+                        render(li, ch);
+                        if (ch >= lines[li].t.length) {
+                            clearInterval(iv); li++;
+                            setTimeout(nextLine, 420);
+                        }
+                    }, 26);
+                } else {
+                    li++;
+                    render(li);
+                    setTimeout(nextLine, lines[li - 1] && lines[li - 1].t === "" ? 140 : 340);
+                }
+            }
+            setTimeout(nextLine, 600);
+        })();
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+            anchor.addEventListener('click', function (e) {
+                var target = document.querySelector(this.getAttribute('href'));
+                if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+            });
+        });
+    </script>
 </body>
 </html>
