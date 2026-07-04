@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gala — Yapay Zekaya Açılan Kapınız</title>
+<meta name="description" content="Şirket içi yapay zekâ altyapısı: kodunuz dışarı çıkmadan, kullanıcı başına lisans ücreti olmadan. OpenCode + yerel modeller + kullanım/bütçe yönetimi.">
+<style>
+:root{
+  --ink:#122226; --paper:#F2F5F4; --card:#FFFFFF;
+  --text:#1B2E32; --muted:#54696D; --line:#D6DEDC;
+  --brass:#A97B24; --brass-strong:#8A6112; --teal:#14555A;
+  --term-bg:#0E1B1E; --term-text:#C7D6D2; --term-green:#7BD88F;
+  --term-red:#E08A7E; --term-dim:#5E7A76; --btn-text:#FFFFFF;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --ink:#0E1B1E; --paper:#0E1B1E; --card:#152528;
+    --text:#DCE7E4; --muted:#8FA6A2; --line:#22383B;
+    --brass:#D9A441; --brass-strong:#E7BC66; --teal:#5FA8AD; --btn-text:#10201F;
+  }
+}
+:root[data-theme="light"]{
+  --ink:#122226; --paper:#F2F5F4; --card:#FFFFFF;
+  --text:#1B2E32; --muted:#54696D; --line:#D6DEDC;
+  --brass:#A97B24; --brass-strong:#8A6112; --teal:#14555A; --btn-text:#FFFFFF;
+}
+:root[data-theme="dark"]{
+  --ink:#0E1B1E; --paper:#0E1B1E; --card:#152528;
+  --text:#DCE7E4; --muted:#8FA6A2; --line:#22383B;
+  --brass:#D9A441; --brass-strong:#E7BC66; --teal:#5FA8AD; --btn-text:#10201F;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
+body{
+  margin:0; background:var(--paper); color:var(--text);
+  font-family:"Segoe UI",system-ui,-apple-system,sans-serif;
+  font-size:17px; line-height:1.6;
+}
+.serif{font-family:Charter,"Iowan Old Style","Palatino Linotype",Georgia,serif}
+.mono{font-family:"Cascadia Code",Consolas,"SF Mono",Menlo,monospace}
+.wrap{max-width:1080px; margin:0 auto; padding:0 24px}
+a{color:var(--brass-strong)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--brass); outline-offset:3px}
+
+/* header */
+header{border-bottom:1px solid var(--line)}
+.nav{display:flex; align-items:baseline; justify-content:space-between; padding:20px 0}
+.mark{font-family:Charter,Georgia,serif; font-size:1.5rem; font-weight:700; color:var(--text); text-decoration:none; letter-spacing:.01em}
+.mark span{color:var(--brass)}
+.nav nav{display:flex; gap:22px; font-size:.92rem}
+.nav nav a{color:var(--muted); text-decoration:none}
+.nav nav a:hover{color:var(--brass-strong)}
+
+/* hero */
+.hero{display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center; padding:72px 0 64px}
+.hero h1{font-family:Charter,"Iowan Old Style",Georgia,serif; font-size:clamp(2rem,4.4vw,3.1rem); line-height:1.12; margin:0 0 20px; text-wrap:balance; font-weight:700}
+.hero h1 em{font-style:normal; color:var(--brass)}
+.hero p.lead{font-size:1.12rem; color:var(--muted); max-width:34em; margin:0 0 30px}
+.cta{display:flex; gap:14px; flex-wrap:wrap}
+.btn{display:inline-block; padding:12px 22px; border-radius:4px; text-decoration:none; font-weight:600; font-size:.98rem}
+.btn.primary{background:var(--brass); color:var(--btn-text); border:1px solid var(--brass)}
+.btn.primary:hover{background:var(--brass-strong); border-color:var(--brass-strong)}
+.btn.ghost{border:1px solid var(--line); color:var(--text)}
+.btn.ghost:hover{border-color:var(--brass)}
+.kicker{text-transform:uppercase; letter-spacing:.14em; font-size:.76rem; color:var(--teal); font-weight:600; margin:0 0 14px}
+
+/* terminal */
+.term{background:var(--term-bg); border-radius:8px; border:1px solid #23393C;
+  box-shadow:0 18px 50px -18px rgba(8,20,22,.55); overflow:hidden; min-height:340px}
+.term-bar{display:flex; align-items:center; gap:8px; padding:10px 14px; background:#132528; border-bottom:1px solid #1D3134}
+.dot{width:10px; height:10px; border-radius:50%; background:#33504D}
+.term-title{margin-left:8px; font-size:.75rem; color:var(--term-dim); font-family:Consolas,monospace}
+.badge-off{margin-left:auto; font-size:.7rem; color:var(--term-red); border:1px solid #4A3230; border-radius:99px; padding:2px 9px; font-family:Consolas,monospace}
+.term-body{padding:18px 18px 22px; font-family:"Cascadia Code",Consolas,Menlo,monospace; font-size:.83rem; line-height:1.75; color:var(--term-text); white-space:pre-wrap}
+.t-dim{color:var(--term-dim)} .t-green{color:var(--term-green)} .t-red{color:var(--term-red)} .t-brass{color:#D9A441}
+.cursor{display:inline-block; width:.55em; height:1.05em; background:var(--term-green); vertical-align:text-bottom; animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+@media (prefers-reduced-motion: reduce){ .cursor{animation:none} }
+
+/* sections */
+section{padding:64px 0; border-top:1px solid var(--line)}
+h2{font-family:Charter,Georgia,serif; font-size:1.75rem; margin:0 0 8px; text-wrap:balance}
+.sub{color:var(--muted); margin:0 0 36px; max-width:44em}
+.grid4{display:grid; grid-template-columns:repeat(4,1fr); gap:20px}
+.card{background:var(--card); border:1px solid var(--line); border-radius:6px; padding:22px}
+.card h3{margin:0 0 8px; font-size:1.02rem}
+.card h3::before{content:""; display:block; width:26px; height:3px; background:var(--brass); margin-bottom:14px}
+.card p{margin:0; font-size:.92rem; color:var(--muted)}
+
+/* architecture strip */
+.arch{display:flex; align-items:stretch; gap:0; background:var(--card); border:1px solid var(--line); border-radius:6px; overflow-x:auto}
+.arch > div{flex:1; min-width:190px; padding:22px; border-right:1px solid var(--line)}
+.arch > div:last-child{border-right:none}
+.arch .who{font-size:.74rem; text-transform:uppercase; letter-spacing:.12em; color:var(--teal); font-weight:600}
+.arch .what{font-family:"Cascadia Code",Consolas,monospace; font-size:.9rem; margin:8px 0 6px; color:var(--text)}
+.arch p{font-size:.85rem; color:var(--muted); margin:0}
+.arrow-note{font-size:.85rem; color:var(--muted); margin-top:14px}
+
+/* roles table */
+table{width:100%; border-collapse:collapse; font-size:.93rem}
+.table-scroll{overflow-x:auto; border:1px solid var(--line); border-radius:6px; background:var(--card)}
+th,td{text-align:left; padding:13px 18px; border-bottom:1px solid var(--line); vertical-align:top}
+tr:last-child td{border-bottom:none}
+th{font-size:.76rem; text-transform:uppercase; letter-spacing:.1em; color:var(--teal)}
+td:first-child{font-weight:600; white-space:nowrap}
+td:nth-child(2){white-space:nowrap; font-family:Consolas,monospace; font-size:.85rem; color:var(--brass-strong)}
+
+/* process */
+.steps{display:grid; grid-template-columns:repeat(4,1fr); gap:20px; counter-reset:step}
+.step{position:relative; padding:22px 22px 22px; background:var(--card); border:1px solid var(--line); border-radius:6px; counter-increment:step}
+.step::before{content:counter(step,decimal-leading-zero); font-family:Charter,Georgia,serif; font-size:1.5rem; color:var(--brass); display:block; margin-bottom:8px}
+.step h3{margin:0 0 6px; font-size:1rem}
+.step p{margin:0; font-size:.88rem; color:var(--muted)}
+.step .dur{display:inline-block; margin-top:10px; font-size:.74rem; font-family:Consolas,monospace; color:var(--teal)}
+
+/* honesty */
+.honest{background:var(--card); border:1px solid var(--line); border-left:4px solid var(--brass); border-radius:6px; padding:28px 30px}
+.honest ul{margin:14px 0 0; padding-left:20px}
+.honest li{margin-bottom:10px; color:var(--muted)}
+.honest li strong{color:var(--text)}
+
+/* tech facts */
+.facts{display:grid; grid-template-columns:repeat(3,1fr); gap:20px}
+.fact{border-top:3px solid var(--teal); padding-top:14px}
+.fact .k{font-size:.76rem; text-transform:uppercase; letter-spacing:.12em; color:var(--teal); font-weight:600}
+.fact .v{font-size:1rem; margin-top:4px}
+.fact .v small{display:block; color:var(--muted); font-size:.85rem; margin-top:2px}
+
+/* cta + footer */
+.finale{text-align:left; padding:72px 0}
+.finale h2{font-size:2rem}
+footer{border-top:1px solid var(--line); padding:26px 0; font-size:.85rem; color:var(--muted)}
+footer .wrap{display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap}
+
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr; padding-top:48px}
+  .grid4,.steps,.facts{grid-template-columns:1fr 1fr}
+}
+@media (max-width:560px){
+  .grid4,.steps,.facts{grid-template-columns:1fr}
+  .nav nav{display:none}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="mark" href="#">Gala<span>.</span></a>
+    <nav>
+      <a href="#neden">Neden</a>
+      <a href="#nasil">Nasıl çalışır</a>
+      <a href="#roller">Kimler için</a>
+      <a href="#acik">Açık konuşalım</a>
+      <a href="#iletisim">İletişim</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap hero">
+  <div>
+    <p class="kicker">Şirket içi yapay zekâ altyapısı</p>
+    <h1>Yapay zekâ içeri girsin.<br>Kodunuz <em>dışarı çıkmasın.</em></h1>
+    <p class="lead">Gala, şirketinizin kendi sunucusunda çalışan anahtar teslim yapay zekâ paketidir:
+    kod yazan ajan asistan, tüm ekip için iç sohbet, kullanım ve bütçe yönetimi.
+    Kullanıcı başına lisans ücreti yok. İnternet bile şart değil — yandaki kayıt uçak modunda alındı.</p>
+    <div class="cta">
+      <a class="btn primary" href="mailto:esatelmas@gmail.com?subject=Gala%20demo%20talebi">Demo isteyin</a>
+      <a class="btn ghost" href="#nasil">Nasıl çalışır?</a>
+    </div>
+  </div>
+  <div class="term" aria-label="Uçak modunda çalışan yapay zekâ asistanı terminal kaydı">
+    <div class="term-bar">
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      <span class="term-title">demo — uçak modu</span>
+      <span class="badge-off">✈ ÇEVRİMDIŞI</span>
+    </div>
+    <div class="term-body" id="termbody"></div>
+  </div>
+</div>
+
+<section id="neden">
+  <div class="wrap">
+    <h2>Neden Gala?</h2>
+    <p class="sub">Ekipler bugün ikiye bölünmüş durumda: kodu buluta yapıştırıp gizliliği göze almak,
+    ya da yapay zekâdan uzak durup geride kalmak. İkisi de kabul edilebilir değil.</p>
+    <div class="grid4">
+      <div class="card">
+        <h3>Veri şirkette kalır</h3>
+        <p>Modeller kendi sunucunuzda çalışır. İstemler, kod ve dokümanlar hiçbir dış servise gitmez.
+        KVKK ve müşteri sözleşmeleriyle kavga etmezsiniz; kapalı ağda dahi çalışır.</p>
+      </div>
+      <div class="card">
+        <h3>Faturasız kullanım</h3>
+        <p>Tüm bileşenler açık kaynak: kullanıcı başına, ay başına, token başına ücret yok.
+        Bir kez donanım yatırımı; kullanım arttıkça maliyet artmaz.</p>
+      </div>
+      <div class="card">
+        <h3>İş yapan asistan</h3>
+        <p>Sohbet kutusu değil: dosyayı bulan, okuyan, düzelten ve diff öneren ajan asistan.
+        Geliştirici terminalinden çıkmadan çalışır.</p>
+      </div>
+      <div class="card">
+        <h3>Kontrol yönetimde</h3>
+        <p>Ekip başına API anahtarı ve aylık bütçe; kim, hangi model, ne kadar —
+        hepsi yönetim panosunda. Personel ayrılınca anahtar tek komutla iptal.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="nasil">
+  <div class="wrap">
+    <h2>Nasıl çalışır?</h2>
+    <p class="sub">Üç katman, tek sunucu. Yarın daha güçlü donanım aldığınızda ya da yeni model çıktığında
+    değişiklik yalnız sunucuda yapılır — geliştirici bilgisayarlarında tek satır değişmez.</p>
+    <div class="arch">
+      <div>
+        <span class="who">Kullanıcılar</span>
+        <div class="what">OpenCode · tarayıcı</div>
+        <p>Geliştiriciler terminalden, diğer roller ChatGPT benzeri iç arayüzden bağlanır. Kişisel API anahtarıyla, şirket ağı üzerinden.</p>
+      </div>
+      <div>
+        <span class="who">Gala ağ geçidi</span>
+        <div class="what">anahtar · bütçe · kayıt</div>
+        <p>Her istek buradan geçer: kimlik doğrulanır, bütçe kontrol edilir, kullanım kaydedilir. Sabit model adları sunar.</p>
+      </div>
+      <div>
+        <span class="who">Modeller</span>
+        <div class="what">şirket GPU sunucusu</div>
+        <p>Açık kaynak modeller (Apache 2.0) kendi donanımınızda çalışır. İsterseniz seçili görevler için kontrollü bulut ek modülü.</p>
+      </div>
+    </div>
+    <p class="arrow-note">Kurulumdan sonra internet bağlantısı zorunlu değildir; tamamen izole ağlar için çevrimdışı kurulum modülü mevcuttur.</p>
+  </div>
+</section>
+
+<section id="roller">
+  <div class="wrap">
+    <h2>Sadece geliştiriciler için değil</h2>
+    <p class="sub">Tek altyapı, bütün üretim hattı. Geliştirici olmayan roller hiçbir kurulum yapmaz — tarayıcı yeter.</p>
+    <div class="table-scroll">
+      <table>
+        <tr><th>Rol</th><th>Araç</th><th>Günlük kullanım</th></tr>
+        <tr><td>Geliştirici</td><td>opencode</td><td>Kod yazma ve düzeltme, hata çözme, test ekleme, PR özeti — dosyalar üzerinde çalışan ajan asistanla</td></tr>
+        <tr><td>Analist</td><td>tarayıcı</td><td>Müşteri talebinden user story, kabul kriterleri, edge-case listesi</td></tr>
+        <tr><td>Tester</td><td>tarayıcı</td><td>Kabul kriterinden test senaryoları, test verisi üretimi, bug raporu netleştirme</td></tr>
+        <tr><td>Ürün sahibi</td><td>tarayıcı</td><td>Story bölme, release notu, paydaş iletişimi taslakları</td></tr>
+        <tr><td>Yönetim</td><td>pano</td><td>Ekip bazında kullanım, harcama ve adaptasyon raporları</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Kurulum süreci</h2>
+    <p class="sub">Anahtar teslim: değerlendirmeden işletim devrine kadar biz yürütürüz, sisteminiz size çalışır hâlde teslim edilir.</p>
+    <div class="steps">
+      <div class="step"><h3>Değerlendirme</h3><p>Ekip, donanım, ağ ve süreç analizi; donanım boyutlandırma önerisi ve teklif.</p><span class="dur">1 gün</span></div>
+      <div class="step"><h3>Kurulum</h3><p>Sunucu kurulumu, model seti, anahtar/bütçe yapısı, uçtan uca doğrulama testleri.</p><span class="dur">1–2 gün</span></div>
+      <div class="step"><h3>Eğitim</h3><p>Rol bazlı uygulamalı eğitim: geliştirici, analist/tester/ürün sahibi, BT işletimi.</p><span class="dur">yarım–2 gün</span></div>
+      <div class="step"><h3>Destek</h3><p>30 gün uzaktan destek, haftalık değerlendirme, işletim devri ve dokümantasyon.</p><span class="dur">30 gün</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="acik">
+  <div class="wrap">
+    <h2>Açık konuşalım</h2>
+    <p class="sub">Satın alma kararını sağlam vermeniz için, sınırları biz söyleyelim:</p>
+    <div class="honest">
+      <ul>
+        <li><strong>Yerel modeller Claude ya da GPT değildir.</strong> Rutin kodlama işinin büyük bölümünü güvenle taşırlar;
+        en zor işler için, neyin dışarı çıkacağını sizin belirlediğiniz kontrollü hibrit seçenek sunuyoruz.</li>
+        <li><strong>Model kalitesi donanımla ölçeklenir.</strong> 24GB GPU sınıfı bir sunucu ekip için rahat çalışır;
+        boyutlandırmayı satış için değil, gerçek eşzamanlı kullanıma göre yaparız.</li>
+        <li><strong>Yapay zekâ taslak üretir, imzayı ekibiniz atar.</strong> Çıktılar kod incelemesinden ve insan onayından geçer —
+        bunu süreçle birlikte kurarız, yerine değil.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Teknik özet</h2>
+    <p class="sub">BT ekibinizin ilk soracakları; ayrıntılı gereksinim listesi ve bileşen lisans dökümü teklifle birlikte paylaşılır.</p>
+    <div class="facts">
+      <div class="fact"><span class="k">Sunucu</span><div class="v">Ubuntu 22.04+ · NVIDIA GPU<small>pilot için 24GB VRAM sınıfı; büyüme yolu hazır</small></div></div>
+      <div class="fact"><span class="k">Yazılım</span><div class="v">Docker Engine · açık kaynak yığın<small>MIT / Apache 2.0 bileşenler; sürümler sabitlenir</small></div></div>
+      <div class="fact"><span class="k">Ağ</span><div class="v">2 port, yalnız iç ağ<small>internet sadece kurulum penceresinde gerekir</small></div></div>
+      <div class="fact"><span class="k">Bulut</span><div class="v">Gerekmez<small>hesap yok, API anahtarı yok, abonelik yok</small></div></div>
+      <div class="fact"><span class="k">Kullanıcı tarafı</span><div class="v">Win / macOS / Linux<small>geliştiriciye tek CLI; diğer rollere tarayıcı</small></div></div>
+      <div class="fact"><span class="k">Lisans</span><div class="v">Kullanıcı başına ücret yok<small>donanım bir kez, danışmanlık kapsam bazlı</small></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="finale" id="iletisim">
+  <div class="wrap">
+    <h2>Ekibinizde görmek ister misiniz?</h2>
+    <p class="sub">30 dakikalık görüşmede sistemi canlı gösterelim — uçak modunda, kendi makinemizde.
+    Sonrası: 1 günlük değerlendirme ve size özel boyutlandırılmış teklif.</p>
+    <div class="cta">
+      <a class="btn primary" href="mailto:esatelmas@gmail.com?subject=Gala%20demo%20talebi">Demo isteyin</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span><strong>Gala</strong> — Yapay Zekaya Açılan Kapınız</span>
+    <span>© 2026 · Esat Elmas · esatelmas@gmail.com</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var lines = [
+    {t:"$ ping 8.8.8.8", c:""},
+    {t:"Genel hata: ağ erişimi yok.", c:"t-red"},
+    {t:"", c:""},
+    {t:"$ node index.js total", c:""},
+    {t:"Total: 010.505        # bug: toplama yerine birleştirme", c:"t-dim"},
+    {t:"", c:""},
+    {t:"$ opencode \"total komutundaki bug'ı düzelt\"", c:""},
+    {t:"→ index.js okundu", c:"t-dim"},
+    {t:"← index.js düzenlendi (parseFloat eklendi)", c:"t-brass"},
+    {t:"", c:""},
+    {t:"$ node index.js total", c:""},
+    {t:"Total: 15.5", c:"t-green"},
+    {t:"", c:""},
+    {t:"✔ internete çıkan paket: 0", c:"t-green"}
+  ];
+  var el = document.getElementById("termbody");
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function render(upto, partial){
+    var html = "";
+    for (var i=0; i<upto; i++){
+      var l = lines[i];
+      html += l.c ? '<span class="'+l.c+'">'+l.t+"</span>\n" : l.t+"\n";
+    }
+    if (partial !== undefined){
+      var p = lines[upto];
+      var frag = p.t.slice(0, partial);
+      html += p.c ? '<span class="'+p.c+'">'+frag+"</span>" : frag;
+    }
+    el.innerHTML = html + '<span class="cursor"></span>';
+  }
+  if (reduce){ render(lines.length); return; }
+  var li = 0;
+  function nextLine(){
+    if (li >= lines.length){ render(lines.length); return; }
+    var isCmd = lines[li].t.charAt(0) === "$";
+    if (isCmd){
+      var ch = 0;
+      var iv = setInterval(function(){
+        ch++;
+        render(li, ch);
+        if (ch >= lines[li].t.length){
+          clearInterval(iv); li++;
+          setTimeout(nextLine, 420);
+        }
+      }, 26);
+    } else {
+      li++;
+      render(li);
+      setTimeout(nextLine, lines[li-1] && lines[li-1].t === "" ? 140 : 340);
+    }
+  }
+  setTimeout(nextLine, 600);
+})();
+</script>
+</body>
+</html>
